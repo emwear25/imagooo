@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { searchProducts, primaryImage } from '~/utils/catalog'
+import { searchProducts, primaryImage, imageUrl } from '~/utils/catalog'
 import { formatPrice } from '~/utils/format'
 
 const props = withDefaults(defineProps<{ autofocus?: boolean; compact?: boolean }>(), { autofocus: false, compact: false })
@@ -14,7 +14,8 @@ const root = ref<HTMLElement | null>(null)
 const id = useId()
 const listId = `${id}-list`
 
-const results = computed(() => (q.value.trim().length >= 2 ? searchProducts(q.value).slice(0, 5) : []))
+const { products } = useCatalog()
+const results = computed(() => (q.value.trim().length >= 2 ? searchProducts(q.value, products.value).slice(0, 5) : []))
 const showList = computed(() => open.value && q.value.trim().length >= 2)
 const optionCount = computed(() => results.value.length + 1)
 
@@ -117,7 +118,7 @@ function onFocusOut(e: FocusEvent) {
         >
           <img
             v-if="primaryImage(p)"
-            :src="`${primaryImage(p)!.src}-480.webp`"
+            :src="imageUrl(primaryImage(p)!, 480)"
             alt=""
             width="44"
             height="55"

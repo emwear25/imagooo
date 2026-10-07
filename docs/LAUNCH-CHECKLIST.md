@@ -53,7 +53,9 @@ Confirmed on 2026-10-07: Imagoo is operated by the same company as emWear. The d
 - [ ] Set `site.isDemo = false`. This removes the demo banners and turns indexing on in `useSeo`.
 - [ ] Remove the `X-Robots-Tag` rule in `nuxt.config.ts` and replace `public/robots.txt` with an allowing version plus a sitemap.
 - [ ] Add structured data (Product/Offer) **only** with real prices and availability.
-- [ ] Connect the catalogue, cart and checkout to the shared backend (`../server`). Use `useApi()` (`app/composables/useApi.ts`), which already sends `X-Store: imagoo`. Stripe returns to `/porachka/uspeshna` and `/porachka/otkazana`; both pages still need to be built. See `../server/MULTI_STORE.md`.
+- [x] Catalogue, cart, checkout (cash on delivery and Stripe), couriers, contact and newsletter are connected to the shared backend.
+- [ ] Add the real products in the dashboard (switch to Imagoo), or import the demo catalogue: `server/scripts/seed-imagoo-catalog.js --apply`.
+- [ ] Place one real test order with each payment method after deploy.
 - [ ] Run the server migration once: `node migrations/multistore.js --apply`. Verify `info@imagoo.bg` in AWS SES.
 - [ ] Connect the contact form to a mail service and add spam protection.
 - [ ] Set up a courier office picker through the courier API.

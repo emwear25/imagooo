@@ -1,6 +1,11 @@
-import type { Category, CategorySlug } from '~/types/catalog'
+import type { Category } from '~/types/catalog'
 
-export const categories: Category[] = [
+/**
+ * Presentation for the Imagoo categories (intro text, tile tint, showcase products).
+ * Categories themselves come from the backend; a category created in the dashboard
+ * without a preset here gets neutral defaults (stores/catalog.ts).
+ */
+export const categoryPresets: Category[] = [
   {
     slug: 'dom-i-dekoraciya',
     name: 'Дом и декорация',
@@ -92,8 +97,3 @@ export const categories: Category[] = [
     seoDescription: 'Сезонни и празнични декорации и подаръци с име, изработени с 3D печат — Imagoo.',
   },
 ]
-
-export const categoryBySlug = (slug: string): Category | undefined =>
-  categories.find((c) => c.slug === slug)
-
-export const categoryName = (slug: CategorySlug): string => categoryBySlug(slug)?.name ?? ''

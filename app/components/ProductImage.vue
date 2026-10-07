@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ProductImage } from '~/types/catalog'
-import { srcset } from '~/utils/catalog'
+import { imageUrl, srcset } from '~/utils/catalog'
 
 /** Responsive product image with reserved aspect ratio and a graceful fallback. */
 const props = withDefaults(
@@ -15,8 +15,8 @@ watch(() => props.image?.src, () => (failed.value = false))
   <div class="pimg" :style="{ aspectRatio: image ? `${image.width} / ${image.height}` : '4 / 5' }">
     <img
       v-if="image && !failed"
-      :src="`${image.src}-800.webp`"
-      :srcset="srcset(image.src)"
+      :src="imageUrl(image)"
+      :srcset="srcset(image)"
       :sizes="sizes"
       :width="image.width"
       :height="image.height"

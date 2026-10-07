@@ -1,13 +1,5 @@
-export type CategorySlug =
-  | 'dom-i-dekoraciya'
-  | 'kuhnya-i-organizaciya'
-  | 'igrachki-i-zabavlenie'
-  | 'aksesoari-i-klyuchodarzhateli'
-  | 'praktichni-resheniya'
-  | 'personalizirani-podaraci'
-  | 'komplekti-za-igra'
-  | 'skulpturi-i-art'
-  | 'praznici-i-sezoni'
+/** Category slug. Categories come from the backend, so any slug is possible. */
+export type CategorySlug = string
 
 /** Filament colours used across the catalogue (ids shared with the render pipeline). */
 export type FilamentId =
@@ -36,18 +28,35 @@ export interface Category {
 }
 
 export interface ProductImage {
-  view: 'hero' | 'side' | 'top'
-  /** Path without size suffix; files exist as `${src}-{480|800|1200}.webp`. */
+  view: string
+  /**
+   * Local storefront image: path without size suffix, files exist as `${src}-{480|800|1200}.webp`.
+   * Remote image (`remote: true`, e.g. Cloudinary upload from the dashboard): the full URL.
+   */
   src: string
   width: number
   height: number
+  remote?: boolean
+}
+
+/** One colour in a swatch; satin filaments get a sheen. */
+export interface Swatch {
+  hex: string
+  silk?: boolean
 }
 
 export interface ColorVariant {
+  /** Stable id: the colour name in the backend (also used in the cart). */
   id: string
   name: string
-  /** One or more filament ids shown as the swatch. */
+  /** Colours shown in the swatch (multi-colour prints have several). */
+  swatches: Swatch[]
+  /** Palette filaments matching the swatch colours (used by the colour filter). */
   filaments: FilamentId[]
+  /** Backend size of this colour's variant (orders need size + colour). */
+  size?: string
+  /** False when the backend variant is out of stock. */
+  available?: boolean
 }
 
 export interface PersonalizationField {
@@ -84,6 +93,7 @@ export interface DesignSource {
 export type ProductBadge = 'new' | 'personalizable' | 'set' | 'picked'
 
 export interface Product {
+  /** Backend product id (used for orders); demo products use demo ids. */
   id: string
   slug: string
   name: string
@@ -94,8 +104,10 @@ export interface Product {
   category: CategorySlug
   /** Additional categories the product is also listed in. */
   alsoIn?: CategorySlug[]
-  /** Demo price in euro cents. */
+  /** Price in euro cents (after any active discount). */
   priceCents: number
+  /** Price before discount, when the product is on sale. */
+  compareAtCents?: number
   variants: ColorVariant[]
   personalization?: PersonalizationField
   specs: ProductSpecs
@@ -111,6 +123,10 @@ export interface Product {
   rank: number
   /** Set when the design comes from a community designer (attribution shown on the product page). */
   design?: DesignSource
+  /** Images per variant id. */
+  images: Record<string, ProductImage[]>
+  /** White-ground render for tinted tiles (demo renders only). */
+  cutout?: ProductImage
 }
 
 export interface CartLine {
@@ -122,3 +138,12 @@ export interface CartLine {
   personalization?: string
   addedAt: number
 }
+
+/** Demo catalogue entry (app/data): colours by filament id, images from the render manifest. */
+export interface DemoVariant {
+  id: string
+  name: string
+  filaments: FilamentId[]
+}
+
+export type DemoProduct = Omit<Product, 'variants' | 'images' | 'cutout'> & { variants: DemoVariant[] }

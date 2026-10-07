@@ -1,4 +1,4 @@
-import type { DesignSource, Product } from '~/types/catalog'
+import type { DesignSource, DemoProduct } from '~/types/catalog'
 import { PLA, SILK_PLA, careDecor, playSetNotice, toyNotice } from './product-copy'
 
 /**
@@ -17,7 +17,7 @@ const printables = (id: string, title: string, designer: string, license: string
   title, designer, platform: 'Printables', url: `https://www.printables.com/model/${id}`, license, licenseUrl, checkedOn, note,
 })
 
-export const community: Product[] = [
+export const community: DemoProduct[] = [
   // ------------------------------------------------------------ decor
   {
     id: 'c01', slug: 'vaza-roza', name: 'Ваза „Роза“', tagline: 'Спирални листенца, които се разтварят нагоре',

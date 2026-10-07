@@ -10,8 +10,11 @@ useSeo({
 const c = store.company
 const topics = ['Въпрос за продукт', 'Персонализация', 'Идея за нов продукт', 'Друго']
 const form = reactive({ name: '', email: '', topic: topics[0]!, message: '' })
+const api = useApi()
 const submitted = ref(false)
 const attempted = ref(false)
+const sending = ref(false)
+const sendError = ref('')
 const resultEl = ref<HTMLElement | null>(null)
 
 const errors = computed(() => {
@@ -31,9 +34,22 @@ async function onSubmit() {
     document.getElementById(`c-${first}`)?.focus()
     return
   }
-  submitted.value = true
-  await nextTick()
-  resultEl.value?.focus()
+  sending.value = true
+  sendError.value = ''
+  try {
+    await api('/api/contact', {
+      method: 'POST',
+      body: { name: form.name.trim(), email: form.email.trim(), message: `[${form.topic}] ${form.message.trim()}` },
+    })
+    submitted.value = true
+    form.message = ''
+    await nextTick()
+    resultEl.value?.focus()
+  } catch {
+    sendError.value = `Съобщението не беше изпратено. Опитай отново или ни пиши на ${c.email.value}.`
+  } finally {
+    sending.value = false
+  }
 }
 </script>
 
@@ -68,17 +84,12 @@ async function onSubmit() {
 
       <section class="ct__form" aria-labelledby="ct-form">
         <h2 id="ct-form">Изпрати съобщение</h2>
-        <div class="notice notice--purple">
-          <AppIcon name="info" />
-          <p><strong>Изпращането не е активно в демо версията.</strong> Формата проверява полетата, но съобщението няма да бъде изпратено.</p>
-        </div>
-
         <div v-if="submitted" ref="resultEl" class="ct__result" tabindex="-1" role="status">
-          <AppIcon name="info" :size="22" />
+          <AppIcon name="check" :size="22" />
           <div>
-            <p><strong>Съобщението не е изпратено.</strong></p>
-            <p>Полетата са попълнени правилно, но в тази демо версия няма връзка с пощенска услуга и нищо не е напуснало браузъра ти.</p>
-            <button type="button" class="btn btn--ghost btn--sm" @click="submitted = false">Обратно към формата</button>
+            <p><strong>Благодарим! Съобщението е изпратено.</strong></p>
+            <p>Ще ти отговорим на {{ form.email }} в работно време ({{ c.hours.value }}).</p>
+            <button type="button" class="btn btn--ghost btn--sm" @click="submitted = false">Ново съобщение</button>
           </div>
         </div>
 
@@ -106,9 +117,10 @@ async function onSubmit() {
             <p v-if="show('message')" id="ce-message" class="field-error"><AppIcon name="alert" :size="16" /> {{ errors.message }}</p>
           </div>
           <p class="field-hint">
-            Как бихме обработвали данните от формата след старта: <NuxtLink to="/poveritelnost">Политика за поверителност</NuxtLink>.
+            Как обработваме данните от формата: <NuxtLink to="/poveritelnost">Политика за поверителност</NuxtLink>.
           </p>
-          <button type="submit" class="btn">Провери и изпрати (демо)</button>
+          <p v-if="sendError" class="field-error" role="alert"><AppIcon name="alert" :size="16" /> {{ sendError }}</p>
+          <button type="submit" class="btn" :disabled="sending">{{ sending ? 'Изпращане…' : 'Изпрати' }}</button>
         </form>
       </section>
     </div>

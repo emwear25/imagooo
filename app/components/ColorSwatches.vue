@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ColorVariant } from '~/types/catalog'
-import { filaments } from '~/data/filaments'
 
 /** Accessible radio group of colour swatches (arrow keys move between options). */
 const props = withDefaults(defineProps<{ variants: ColorVariant[]; label: string; size?: 'sm' | 'lg' }>(), { size: 'lg' })
@@ -10,8 +9,8 @@ const name = useId()
 const SHEEN = 'linear-gradient(135deg, rgb(255 255 255 / 60%) 0%, rgb(255 255 255 / 0%) 45%, rgb(0 0 0 / 0%) 60%, rgb(0 0 0 / 14%) 100%)'
 
 function swatchStyle(v: ColorVariant) {
-  const cols = v.filaments.map((f) => filaments[f].hex)
-  const silk = v.filaments.some((f) => filaments[f].finish === 'silk')
+  const cols = v.swatches.map((s) => s.hex)
+  const silk = v.swatches.some((s) => s.silk)
   const step = 100 / cols.length
   const base = cols.length === 1 ? `linear-gradient(${cols[0]}, ${cols[0]})` : `conic-gradient(${cols.map((c, i) => `${c} ${i * step}% ${(i + 1) * step}%`).join(', ')})`
   return { backgroundImage: silk ? `${SHEEN}, ${base}` : base }
@@ -24,10 +23,10 @@ function swatchStyle(v: ColorVariant) {
       {{ label }}<template v-if="size === 'lg'">: <strong>{{ variants.find((v) => v.id === model)?.name }}</strong></template>
     </legend>
     <div class="sw__list">
-      <label v-for="v in props.variants" :key="v.id" class="sw__opt" :title="v.name">
-        <input v-model="model" type="radio" :name="name" :value="v.id" class="visually-hidden" />
+      <label v-for="v in props.variants" :key="v.id" class="sw__opt" :class="{ 'sw__opt--off': v.available === false }" :title="v.available === false ? `${v.name} — изчерпан` : v.name">
+        <input v-model="model" type="radio" :name="name" :value="v.id" class="visually-hidden" :disabled="v.available === false" />
         <span class="sw__dot" :style="swatchStyle(v)" aria-hidden="true" />
-        <span class="visually-hidden">{{ v.name }}</span>
+        <span class="visually-hidden">{{ v.name }}<template v-if="v.available === false"> (изчерпан)</template></span>
       </label>
     </div>
   </fieldset>
@@ -90,6 +89,10 @@ function swatchStyle(v: ColorVariant) {
     width: 36px;
     height: 36px;
   }
+}
+.sw__opt--off {
+  cursor: not-allowed;
+  opacity: 0.35;
 }
 .sw__opt:hover .sw__dot {
   transform: scale(1.08);

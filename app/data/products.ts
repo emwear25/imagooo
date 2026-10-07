@@ -1,4 +1,4 @@
-import type { Product } from '~/types/catalog'
+import type { DemoProduct } from '~/types/catalog'
 
 /**
  * Demo catalogue. Prices, dimensions and availability are example data for the prototype.
@@ -9,7 +9,7 @@ import { PLA, careDecor, careSoft, toyNotice, foodNotice } from './product-copy'
 import { wave2 } from './products-wave2'
 import { community } from './products-community'
 
-const wave1: Product[] = [
+const wave1: DemoProduct[] = [
   // ------------------------------------------------------------ Дом и декорация
   {
     id: 'p01', slug: 'vaza-valna', name: 'Ваза „Вълна“', tagline: 'Спирални ребра, които улавят светлината',
@@ -399,6 +399,5 @@ const wave1: Product[] = [
   },
 ]
 
-export const products: Product[] = [...wave1, ...wave2, ...community]
-
-export const productBySlug = (slug: string): Product | undefined => products.find((p) => p.slug === slug)
+/** Demo catalogue, used when the backend has no Imagoo products yet (see stores/catalog.ts). */
+export const demoProducts: DemoProduct[] = [...wave1, ...wave2, ...community]

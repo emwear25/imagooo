@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { Category } from '~/types/catalog'
-import { productBySlug, products } from '~/data/products'
-import { inCategory, cutoutImage, srcset } from '~/utils/catalog'
+import { inCategory, cutoutImage, imageUrl, srcset } from '~/utils/catalog'
 import { pluralProducts } from '~/utils/format'
 
 const props = defineProps<{ category: Category; headingLevel?: 2 | 3 }>()
+const { products, productBySlug } = useCatalog()
 const imgs = computed(() =>
   props.category.showcase
     .slice(0, 3)
@@ -12,7 +12,7 @@ const imgs = computed(() =>
     .map((p) => (p ? cutoutImage(p) : undefined))
     .filter((i) => !!i),
 )
-const count = computed(() => products.filter((p) => inCategory(p, props.category.slug)).length)
+const count = computed(() => products.value.filter((p) => inCategory(p, props.category.slug)).length)
 </script>
 
 <template>
@@ -21,8 +21,8 @@ const count = computed(() => products.filter((p) => inCategory(p, props.category
       <img
         v-for="(img, i) in imgs"
         :key="img!.src"
-        :src="`${img!.src}-480.webp`"
-        :srcset="srcset(img!.src)"
+        :src="imageUrl(img!, 480)"
+        :srcset="srcset(img!)"
         sizes="(min-width: 1024px) 14vw, 30vw"
         alt=""
         width="480"

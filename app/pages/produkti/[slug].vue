@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { productBySlug } from '~/data/products'
-import { categoryBySlug } from '~/data/categories'
-import { productImages, relatedProducts, srcset } from '~/utils/catalog'
+import { imageUrl, productImages, relatedProducts } from '~/utils/catalog'
 import { formatDays, formatPrice } from '~/utils/format'
 import { PERSONALIZATION_PATTERN } from '~/utils/text'
 import { store } from '~/config/store'
@@ -13,12 +11,13 @@ definePageMeta({ key: (r) => r.path })
 
 const route = useRoute()
 const router = useRouter()
+const { products, productBySlug, categoryBySlug, canOrder } = useCatalog()
 const product = computed(() => productBySlug(String(route.params.slug)))
 if (!product.value) {
   throw createError({ statusCode: 404, message: 'Продуктът не е намерен' })
 }
 const p = computed(() => product.value!)
-const category = computed(() => categoryBySlug(p.value.category)!)
+const category = computed(() => categoryBySlug(p.value.category) ?? { slug: p.value.category, name: 'Категория' })
 
 const cart = useCartStore()
 const wishlist = useWishlistStore()
@@ -27,7 +26,9 @@ const ui = useUiStore()
 // ---- variant (synced with ?cvyat=)
 const initialVariant = () => {
   const q = route.query.cvyat
-  return typeof q === 'string' && p.value.variants.some((v) => v.id === q) ? q : p.value.variants[0]!.id
+  if (typeof q === 'string' && p.value.variants.some((v) => v.id === q)) return q
+  // first colour that is in stock
+  return (p.value.variants.find((v) => v.available !== false) ?? p.value.variants[0]!).id
 }
 const variantId = ref(initialVariant())
 const variant = computed(() => p.value.variants.find((v) => v.id === variantId.value)!)
@@ -78,7 +79,9 @@ const textInput = ref<HTMLInputElement | null>(null)
 // ---- quantity & add
 const qty = ref(1)
 const justAdded = ref(false)
+const soldOut = computed(() => variant.value.available === false)
 function addToCart() {
+  if (soldOut.value) return
   touched.value = true
   if (textError.value) {
     textInput.value?.focus()
@@ -90,7 +93,7 @@ function addToCart() {
   ui.toast({
     title: 'Добавено в количката',
     body: `${p.value.name} · ${variant.value.name}${text.value.trim() ? ` · „${text.value.trim()}“` : ''} × ${qty.value}`,
-    image: images.value[0] ? `${images.value[0].src}-480.webp` : undefined,
+    image: images.value[0] ? imageUrl(images.value[0], 480) : undefined,
     action: { label: 'Към количката', to: '/kolichka' },
     tone: 'success',
   })
@@ -112,7 +115,7 @@ onMounted(() => {
 })
 onBeforeUnmount(() => io?.disconnect())
 
-const related = computed(() => relatedProducts(p.value, 4))
+const related = computed(() => relatedProducts(p.value, products.value, 4))
 const sh = store.shipping
 const clip = (t: string, n: number) => (t.length <= n ? t : `${t.slice(0, t.lastIndexOf(' ', n - 1))}…`)
 
@@ -120,7 +123,7 @@ useSeo(() => ({
   title: p.value.name,
   description: clip(`${p.value.name} — ${p.value.tagline}. ${p.value.description[0]}`, 158),
   path: `/produkti/${p.value.slug}`,
-  image: images.value[0] ? `${images.value[0].src}-1200.webp` : undefined,
+  image: images.value[0] ? imageUrl(images.value[0], 1200) : undefined,
   type: 'product',
 }))
 </script>
@@ -166,10 +169,10 @@ useSeo(() => ({
             @click="activeImg = i"
             @keydown="onThumbKey($event, i)"
           >
-            <img :src="`${img.src}-480.webp`" alt="" width="96" height="120" loading="lazy" />
+            <img :src="imageUrl(img, 480)" alt="" width="96" height="120" loading="lazy" />
           </button>
         </div>
-        <p class="gal__disclaimer">
+        <p v-if="current && !current.remote" class="gal__disclaimer">
           <AppIcon name="info" :size="16" /> Изображенията са концептуални визуализации. Реалният нюанс може леко да се различава.
         </p>
       </section>
@@ -183,8 +186,11 @@ useSeo(() => ({
         </ul>
         <h1 id="pdp-title" class="buy__title">{{ p.name }}</h1>
         <p class="buy__tagline">{{ p.tagline }}</p>
-        <PriceTag :cents="p.priceCents" size="lg" class="buy__price" />
-        <p class="buy__vat">Демо цена. Крайната цена и данъчните условия ще бъдат потвърдени преди старта.</p>
+        <PriceTag :cents="p.priceCents" :compare-at-cents="p.compareAtCents" size="lg" class="buy__price" />
+        <p class="buy__vat">
+          <template v-if="canOrder">Цената включва ДДС.</template>
+          <template v-else>Демо цена — магазинът все още не приема поръчки.</template>
+        </p>
 
         <form class="buy__form" novalidate @submit.prevent="addToCart">
           <ColorSwatches v-model="variantId" :variants="p.variants" label="Цвят" />
@@ -222,9 +228,9 @@ useSeo(() => ({
 
           <div class="buy__row">
             <QtyStepper v-model="qty" :max="MAX_QTY" label="Количество" />
-            <button type="submit" class="btn btn--coral buy__add">
+            <button type="submit" class="btn btn--coral buy__add" :disabled="soldOut">
               <AppIcon :name="justAdded ? 'check' : 'bag'" />
-              {{ justAdded ? 'Добавено' : 'Добави в количката' }}
+              {{ soldOut ? 'Изчерпан' : justAdded ? 'Добавено' : 'Добави в количката' }}
             </button>
             <button
               type="button"
@@ -259,7 +265,7 @@ useSeo(() => ({
               </p>
             </div>
           </div>
-          <p class="buy__shipNote">Сроковете са индикативни и не представляват обвързващ ангажимент в тази демо версия.</p>
+          <p class="buy__shipNote">Сроковете за изработка са ориентировъчни.</p>
         </div>
 
         <div v-if="p.notice" class="notice">
@@ -304,7 +310,7 @@ useSeo(() => ({
             </dd>
           </div>
         </dl>
-        <p class="details__demo">Размерите и материалите са демонстрационни данни.</p>
+        <p v-if="!canOrder" class="details__demo">Размерите и материалите са демонстрационни данни.</p>
         <div v-if="p.design" class="credit">
           <h3>Дизайн</h3>
           <p>

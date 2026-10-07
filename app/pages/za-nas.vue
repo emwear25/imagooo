@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { productBySlug } from '~/data/products'
-import { cutoutImage } from '~/utils/catalog'
+import { cutoutImage, imageUrl } from '~/utils/catalog'
 
 useSeo({
   title: 'За нас',
@@ -8,9 +7,12 @@ useSeo({
   path: '/za-nas',
 })
 
-const pics = ['kashpa-oblak', 'drakon-iskra', 'organizer-terasa'].map((s) => {
-  const p = productBySlug(s)!
-  return { p, img: cutoutImage(p) }
+const { products, productBySlug } = useCatalog()
+// Preferred products for the collage; any featured products when they're not in the catalogue
+const pics = computed(() => {
+  const preferred = ['kashpa-oblak', 'drakon-iskra', 'organizer-terasa'].map((s) => productBySlug(s)).filter((p) => !!p)
+  const list = preferred.length === 3 ? preferred : products.value.filter((p) => p.featured).slice(0, 3)
+  return list.map((p) => ({ p, img: cutoutImage(p) }))
 })
 </script>
 
@@ -31,7 +33,7 @@ const pics = ['kashpa-oblak', 'drakon-iskra', 'organizer-terasa'].map((s) => {
         </div>
         <div class="intro__art" aria-hidden="true">
           <span v-for="(x, i) in pics" :key="x.p.slug" class="intro__tile" :class="`intro__tile--${i}`">
-            <img v-if="x.img" :src="`${x.img.src}-800.webp`" alt="" width="1200" height="1500" loading="lazy" />
+            <img v-if="x.img" :src="imageUrl(x.img)" alt="" width="1200" height="1500" loading="lazy" />
           </span>
         </div>
       </section>

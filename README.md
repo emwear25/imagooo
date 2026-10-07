@@ -56,6 +56,16 @@ The backend is the shared emWear/Imagoo server in `../server`. Read `../server/M
 - `useApi()` (`app/composables/useApi.ts`) already sends `X-Store: imagoo`, so every request is scoped to Imagoo data.
 - Set the API URL with `NUXT_PUBLIC_API_BASE` (see `.env.example`).
 - Products and categories are managed in the shared dashboard after switching it to **Imagoo**.
+- **Catalogue:**
+  - Loaded through `server/api/catalog.get.ts`, which proxies the backend with a 60 s cache, into `stores/catalog.ts`.
+  - `utils/catalog-source.ts` maps backend products to the storefront types.
+  - Without backend products, the bundled demo catalogue (`app/data`) is shown and checkout is disabled.
+- **Checkout:**
+  - `/porachka` creates orders (cash on delivery) or a Stripe Checkout session (card).
+  - Офис, автомат and address delivery are available with Еконт and Спиди, with live price estimates.
+  - Stripe returns to `/porachka/uspeshna` or `/porachka/otkazana`.
+- **Contact and newsletter:** the contact form and the footer newsletter post to the backend.
+- **Demo catalogue import:** run `npx tsx tools/catalog/export.ts`, then `server/scripts/seed-imagoo-catalog.js`.
 
 - **Catalogue:** replace `app/data/products.ts` with an API call that returns the same `Product` type. Filtering is pure, in `utils/catalog.ts` and `useCatalogFilters`, and can move server-side.
 - **Cart:** `stores/cart.ts` is the single integration point. Lines are keyed by product, variant and personalisation.

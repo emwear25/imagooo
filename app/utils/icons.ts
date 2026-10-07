@@ -14,6 +14,8 @@ export const iconPaths = {
   minus: '<path d="M5 12h14"/>',
   trash: '<path d="M4 7h16M9 7V4.8h6V7M6.5 7l.8 12.2a1.8 1.8 0 0 0 1.8 1.8h5.8a1.8 1.8 0 0 0 1.8-1.8L17.5 7M10 11v6M14 11v6"/>',
   check: '<path d="m5 12.5 4.2 4.2L19 7"/>',
+  card: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/>',
+  cash: '<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9.5v5M18 9.5v5"/>',
   truck: '<path d="M3 6.5h11v9H3zM14 10h3.6l3.4 3.4v2.1h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/>',
   info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/>',
   alert: '<path d="M12 3.5 2.8 19.5h18.4Z"/><path d="M12 10v4.5M12 17v.1"/>',
