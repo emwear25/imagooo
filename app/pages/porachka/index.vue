@@ -263,8 +263,8 @@ function focusField(id: string) {
     <div v-if="!canOrder" class="notice notice--purple demo">
       <AppIcon name="info" />
       <p>
-        <strong>Магазинът все още не приема поръчки.</strong> Показваме демонстрационен каталог. Ще можеш да поръчаш веднага
-        щом продуктите бъдат публикувани.
+        <strong>Поръчките временно не са достъпни.</strong> Опитай отново след малко или ни пиши — ще помогнем
+        веднага.
       </p>
     </div>
 

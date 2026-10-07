@@ -55,7 +55,7 @@ const badge = (n: number) => (n > 99 ? '99+' : String(n))
     <div class="container demo-bar__inner">
       <AppIcon name="info" :size="16" />
       <p>
-        <strong>Демо версия.</strong> Поръчки и плащания не се приемат — разгледай спокойно.
+        <strong>Магазинът се подготвя.</strong> Скоро тук ще намериш първите ни продукти.
       </p>
     </div>
   </div>

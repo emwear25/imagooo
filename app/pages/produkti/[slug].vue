@@ -172,8 +172,8 @@ useSeo(() => ({
             <img :src="imageUrl(img, 480)" alt="" width="96" height="120" loading="lazy" />
           </button>
         </div>
-        <p v-if="current && !current.remote" class="gal__disclaimer">
-          <AppIcon name="info" :size="16" /> Изображенията са концептуални визуализации. Реалният нюанс може леко да се различава.
+        <p v-if="current" class="gal__disclaimer">
+          <AppIcon name="info" :size="16" /> Реалният нюанс на филамента може леко да се различава от снимките.
         </p>
       </section>
 
@@ -189,7 +189,7 @@ useSeo(() => ({
         <PriceTag :cents="p.priceCents" :compare-at-cents="p.compareAtCents" size="lg" class="buy__price" />
         <p class="buy__vat">
           <template v-if="canOrder">Цената включва ДДС.</template>
-          <template v-else>Демо цена — магазинът все още не приема поръчки.</template>
+          <template v-else>Поръчките временно не са достъпни.</template>
         </p>
 
         <form class="buy__form" novalidate @submit.prevent="addToCart">
@@ -310,7 +310,6 @@ useSeo(() => ({
             </dd>
           </div>
         </dl>
-        <p v-if="!canOrder" class="details__demo">Размерите и материалите са демонстрационни данни.</p>
         <div v-if="p.design" class="credit">
           <h3>Дизайн</h3>
           <p>
@@ -633,11 +632,6 @@ useSeo(() => ({
       padding-left: 1.1em;
     }
   }
-}
-.details__demo {
-  margin-top: 10px;
-  font-size: 0.8125rem;
-  color: var(--muted);
 }
 
 .credit {

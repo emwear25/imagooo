@@ -60,10 +60,6 @@ useSeo({
             Продължи към поръчка
             <AppIcon name="arrow-right" />
           </NuxtLink>
-          <div class="notice notice--purple">
-            <AppIcon name="info" />
-            <p><strong>Демо версия.</strong> Можеш да разгледаш стъпката за поръчка, но поръчки и плащания не се изпращат.</p>
-          </div>
         </OrderSummary>
       </aside>
     </div>

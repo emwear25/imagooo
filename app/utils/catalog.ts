@@ -18,9 +18,9 @@ export function primaryImage(product: Product, variantId?: string) {
   return productImages(product, variantId)[0]
 }
 
-/** White-ground render (soft shadow, no backdrop) for tinted tiles; falls back to the main image. */
+/** Image for tinted tiles and thumbnails (the product's main photo). */
 export function cutoutImage(product: Product): ProductImage | undefined {
-  return product.cutout ?? primaryImage(product)
+  return primaryImage(product)
 }
 
 /** Cloudinary delivery URL resized to `width` (auto format/quality). */

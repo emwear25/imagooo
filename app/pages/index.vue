@@ -12,25 +12,22 @@ useSeo({
   path: '/',
 })
 
-const { products, categories, productBySlug } = useCatalog()
+const { products, categories } = useCatalog()
 
-/**
- * Curated picks by slug, topped up from the catalogue when some of them are
- * not (or no longer) in the shop - real products replace the demo ones.
- */
-function pick(slugs: string[], fallback: (p: Product) => boolean, count = slugs.length): Product[] {
-  const chosen = slugs.map((s) => productBySlug(s)).filter((p): p is Product => !!p)
-  const rest = sortProducts(products.value.filter((p) => fallback(p) && !chosen.includes(p)), 'recommended')
+/** Top products by the dashboard flags ("featured" etc.), filled up by rank. */
+function pick(fallback: (p: Product) => boolean, count: number): Product[] {
+  const chosen = sortProducts(products.value.filter(fallback), 'recommended')
+  const rest = sortProducts(products.value.filter((p) => !chosen.includes(p)), 'recommended')
   return [...chosen, ...rest].slice(0, count)
 }
 
 const HERO_STYLE = [
-  { tint: '#fde4dc', label: 'За рафта' },
-  { tint: '#e6f2ec', label: 'За игра' },
-  { tint: '#ece4fb', label: 'С твоето име' },
+  { tint: '#fde4dc', label: 'Ново' },
+  { tint: '#e6f2ec', label: 'За дома' },
+  { tint: '#ece4fb', label: 'За подарък' },
 ]
 const heroTiles = computed(() =>
-  pick(['vaza-valna', 'komplekt-pasta', 'klyuchodarzhatel-geroi'], (p) => !!p.featured, 3).map((p, i) => ({
+  pick((p) => !!p.featured, 3).map((p, i) => ({
     ...HERO_STYLE[i]!,
     slug: p.slug,
     product: p,
@@ -42,9 +39,7 @@ const featured = computed(() => sortProducts(products.value.filter((p) => p.feat
 const everyday = computed(() =>
   sortProducts(products.value.filter((p) => p.everyday), 'recommended').slice(0, 4),
 )
-const playSets = computed(() =>
-  pick(['komplekt-pasta', 'komplekt-otvari', 'shah-prizma', 'pista-topcheta'], (p) => inCategory(p, 'komplekti-za-igra'), 4),
-)
+const playSets = computed(() => sortProducts(products.value.filter((p) => inCategory(p, 'komplekti-za-igra')), 'recommended').slice(0, 4))
 const playHero = computed(() => (playSets.value[0] ? cutoutImage(playSets.value[0]) : undefined))
 
 const homeFaq = faq.filter((f) => [0, 4, 6, 8].includes(faq.indexOf(f)))
@@ -53,8 +48,9 @@ const homeFaq = faq.filter((f) => [0, 4, 6, 8].includes(faq.indexOf(f)))
 const name = ref('')
 const preview = computed(() => name.value.trim() || 'Мила')
 const nameValid = computed(() => PERSONALIZATION_PATTERN.test(name.value))
-const keychain = computed(() => pick(['klyuchodarzhatel-ime'], (p) => !!p.personalization, 1)[0])
-const gifts = computed(() => pick(['klyuchodarzhatel-geroi', 'tabela-semeystvo', 'obemni-bukvi'], (p) => !!p.personalization, 3))
+const personalised = computed(() => sortProducts(products.value.filter((p) => !!p.personalization), 'recommended'))
+const keychain = computed(() => personalised.value[0])
+const gifts = computed(() => personalised.value.slice(0, 3))
 
 const quick = [
   { label: 'Подаръци с име', to: '/kategorii/personalizirani-podaraci' },
@@ -133,7 +129,7 @@ const quick = [
     </section>
 
     <!-- ============================================================ CATEGORIES -->
-    <section id="kategorii" class="section section--tight-top" aria-labelledby="cats-title">
+    <section v-if="categories.length" id="kategorii" class="section section--tight-top" aria-labelledby="cats-title">
       <div class="container">
         <SectionHead
           id="cats-title"
@@ -151,7 +147,7 @@ const quick = [
     </section>
 
     <!-- ============================================================ FEATURED -->
-    <section class="section section--tight-top" aria-labelledby="featured-title">
+    <section v-if="featured.length" class="section section--tight-top" aria-labelledby="featured-title">
       <div class="container">
         <SectionHead
           id="featured-title"
@@ -206,7 +202,7 @@ const quick = [
     </section>
 
     <!-- ============================================================ EVERYDAY -->
-    <section class="everyday" aria-labelledby="everyday-title">
+    <section v-if="everyday.length" class="everyday" aria-labelledby="everyday-title">
       <div class="container everyday__grid">
         <div class="everyday__intro">
           <p class="eyebrow everyday__eyebrow">Полезни всеки ден</p>
@@ -234,7 +230,7 @@ const quick = [
     </section>
 
     <!-- ============================================================ PERSONALISED -->
-    <section class="section" aria-labelledby="gift-title">
+    <section v-if="gifts.length" class="section" aria-labelledby="gift-title">
       <div class="container">
         <div class="gift">
           <div class="gift__copy">
