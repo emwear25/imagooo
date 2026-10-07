@@ -9,6 +9,9 @@
  *   colors/<slug>/1.jpg…  optional photos per colour; the colour entry in
  *                         product.json names its folder with "photos": "<slug>"
  *
+ * "active": false in product.json keeps the product hidden from the shop
+ * (e.g. until a design licence is confirmed); "active": true shows it again.
+ *
  * Dry run by default. Creates missing categories, uploads photos through the
  * API (Cloudinary, imagoo/products) and creates the product. With --update an
  * existing product (same name) is updated instead: details, colours and
@@ -133,4 +136,10 @@ if (existing) {
   const { data } = await api('/api/products', { method: 'POST', token, form })
   console.log(`  ✓ created ${data.slug} (${data._id}) with ${data.images.length} photo(s), ${data.colorImages?.length ?? 0} colour galleries`)
   console.log(`  https://imagoo.bg/produkti/${data.slug}`)
+}
+
+if (typeof product.active === 'boolean') {
+  const id = existing?._id ?? (await api('/api/products?showAll=true&limit=500', { token })).data.find((p) => p.name === product.name)._id
+  await api(`/api/products/${id}`, { method: 'PATCH', token, json: { isActive: product.active } })
+  console.log(`  ${product.active ? 'visible in the shop' : 'hidden from the shop'}`)
 }
