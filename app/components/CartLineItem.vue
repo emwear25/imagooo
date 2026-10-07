@@ -24,16 +24,20 @@ const to = computed(() => ({ path: `/produkti/${props.line.slug}`, query: { cvya
         <NuxtLink :to="to">{{ line.product.name }}</NuxtLink>
       </h3>
       <dl class="line__opts">
+        <div v-if="line.sizeName">
+          <dt>Размер:</dt>
+          <dd>{{ line.sizeName }}</dd>
+        </div>
         <div>
           <dt>Цвят:</dt>
-          <dd>{{ line.variantName }}</dd>
+          <dd>{{ line.variant.name }}</dd>
         </div>
         <div v-if="line.personalization">
           <dt>{{ line.product.personalization?.label ?? 'Надпис' }}:</dt>
           <dd class="line__text">„{{ line.personalization }}“</dd>
         </div>
       </dl>
-      <p class="line__unit">{{ formatPrice(line.product.priceCents) }} / бр.</p>
+      <p class="line__unit">{{ formatPrice(line.unitCents) }} / бр.</p>
       <div class="line__controls">
         <QtyStepper v-model="qty" :max="MAX_QTY" :label="line.product.name" size="sm" />
         <button type="button" class="line__remove" @click="cart.remove(line.key)">

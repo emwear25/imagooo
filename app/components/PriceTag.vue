@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { formatPrice } from '~/utils/format'
 
-withDefaults(defineProps<{ cents: number; compareAtCents?: number; size?: 'md' | 'lg' }>(), { size: 'md' })
+withDefaults(defineProps<{ cents: number; compareAtCents?: number; size?: 'md' | 'lg'; from?: boolean }>(), { size: 'md' })
 </script>
 
 <template>
   <p class="ptag" :class="`ptag--${size}`">
+    <span v-if="from" class="ptag__from">от</span>
     <span class="price" :class="{ 'price--sale': compareAtCents }">{{ formatPrice(cents) }}</span>
     <s v-if="compareAtCents" class="ptag__was"><span class="visually-hidden">Предишна цена: </span>{{ formatPrice(compareAtCents) }}</s>
   </p>
@@ -14,6 +15,10 @@ withDefaults(defineProps<{ cents: number; compareAtCents?: number; size?: 'md' |
 <style scoped lang="scss">
 .price--sale {
   color: var(--coral-600, #e0564d);
+}
+.ptag__from {
+  color: var(--muted);
+  font-size: 0.875rem;
 }
 .ptag__was {
   color: var(--muted);

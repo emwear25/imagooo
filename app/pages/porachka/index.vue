@@ -189,7 +189,7 @@ function orderPayload() {
     items: cart.resolved.map((l) => ({
       product: l.product.id,
       quantity: l.quantity,
-      size: l.variant.size,
+      size: l.sizeId ?? l.variant.size,
       color: l.variant.id,
       customization: l.personalization ?? null,
     })),

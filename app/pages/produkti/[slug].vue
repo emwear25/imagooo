@@ -37,6 +37,16 @@ watch(variantId, (v) => {
   router.replace({ query: { ...route.query, cvyat: v === p.value.variants[0]!.id ? undefined : v } })
 })
 
+// ---- size (products sold in several sizes, synced with ?razmer=)
+const sizeId = ref(
+  p.value.sizes?.find((s) => s.id === route.query.razmer)?.id ?? p.value.sizes?.[0]?.id ?? '',
+)
+const size = computed(() => p.value.sizes?.find((s) => s.id === sizeId.value))
+const priceCents = computed(() => size.value?.priceCents ?? p.value.priceCents)
+watch(sizeId, (s) => {
+  router.replace({ query: { ...route.query, razmer: s === p.value.sizes?.[0]?.id ? undefined : s } })
+})
+
 // ---- gallery
 const images = computed(() => productImages(p.value, variantId.value))
 const activeImg = ref(0)
@@ -87,12 +97,12 @@ function addToCart() {
     textInput.value?.focus()
     return
   }
-  cart.add(p.value.slug, variantId.value, qty.value, pz.value ? text.value : undefined)
+  cart.add(p.value.slug, variantId.value, qty.value, pz.value ? text.value : undefined, size.value?.id)
   justAdded.value = true
   setTimeout(() => (justAdded.value = false), 2400)
   ui.toast({
     title: 'Добавено в количката',
-    body: `${p.value.name} · ${variant.value.name}${text.value.trim() ? ` · „${text.value.trim()}“` : ''} × ${qty.value}`,
+    body: `${p.value.name} · ${size.value ? `${size.value.name} · ` : ''}${variant.value.name}${text.value.trim() ? ` · „${text.value.trim()}“` : ''} × ${qty.value}`,
     image: images.value[0] ? imageUrl(images.value[0], 480) : undefined,
     action: { label: 'Към количката', to: '/kolichka' },
     tone: 'success',
@@ -186,13 +196,14 @@ useSeo(() => ({
         </ul>
         <h1 id="pdp-title" class="buy__title">{{ p.name }}</h1>
         <p class="buy__tagline">{{ p.tagline }}</p>
-        <PriceTag :cents="p.priceCents" :compare-at-cents="p.compareAtCents" size="lg" class="buy__price" />
+        <PriceTag :cents="priceCents" :compare-at-cents="p.compareAtCents" size="lg" class="buy__price" />
         <p class="buy__vat">
           <template v-if="canOrder">Цената включва ДДС.</template>
           <template v-else>Поръчките временно не са достъпни.</template>
         </p>
 
         <form class="buy__form" novalidate @submit.prevent="addToCart">
+          <SizePicker v-if="p.sizes" v-model="sizeId" :sizes="p.sizes" label="Размер" />
           <ColorSwatches v-model="variantId" :variants="p.variants" label="Цвят" />
 
           <div v-if="pz" class="field buy__pz">
@@ -336,7 +347,7 @@ useSeo(() => ({
       <div v-if="showSticky" class="sticky">
         <div class="sticky__info">
           <strong>{{ p.name }}</strong>
-          <span class="price">{{ formatPrice(p.priceCents) }}</span>
+          <span class="price">{{ formatPrice(priceCents) }}</span>
         </div>
         <button type="button" class="btn btn--coral btn--sm" @click="pz ? (buyBox?.scrollIntoView({ block: 'start' }), textInput?.focus({ preventScroll: true })) : addToCart()">
           {{ pz ? 'Персонализирай' : 'Добави' }}

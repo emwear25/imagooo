@@ -9,6 +9,11 @@
  *   colors/<slug>/1.jpg…  optional photos per colour; the colour entry in
  *                         product.json names its folder with "photos": "<slug>"
  *
+ * "sizes" is a list of names, or of { "name", "price" } for a product sold in
+ * several sizes at different prices (e.g. small / medium / large vase); the
+ * lowest price becomes the product price and each size's price is stored on
+ * its variants. Every variant is (re)stocked with "stockPerColor".
+ *
  * "active": false in product.json keeps the product hidden from the shop
  * (e.g. until a design licence is confirmed); "active": true shows it again.
  *
@@ -36,6 +41,9 @@ const photosIn = (dir) =>
         .sort((a, b) => parseInt(a) - parseInt(b))
         .map((f) => join(dir, f))
     : []
+const sizes = product.sizes.map((s) => (typeof s === 'string' ? { name: s } : s))
+const sizePriced = sizes.some((s) => s.price != null)
+const basePrice = sizePriced ? Math.min(...sizes.map((s) => s.price ?? product.price)) : product.price
 const mainPhotos = photosIn(folder)
 const colourPhotos = product.colors.map((c) => ({ color: c.name, files: c.photos ? photosIn(join(folder, 'colors', c.photos)) : [] }))
 
@@ -117,29 +125,45 @@ for (const entry of existing?.colorImages || []) {
 const form = new FormData()
 form.append('name', product.name)
 form.append('description', product.description)
-form.append('price', String(product.price))
+form.append('price', String(basePrice))
 form.append('category', main.slug)
-form.append('sizes', JSON.stringify(product.sizes))
+form.append('sizes', JSON.stringify(sizes.map((s) => s.name)))
 form.append('colors', JSON.stringify(product.colors.map(({ name, hex }) => ({ name, hex }))))
 form.append('colorImages', JSON.stringify(colorImages))
 form.append('storefront', JSON.stringify({ ...product.storefront, alsoIn: also.map((c) => c._id).filter(Boolean) }))
 if (!existing) form.append('stock', String(product.stockPerColor))
 for (const f of mainPhotos) form.append('images', blob(f), f.split('/').pop())
 
+let saved
 if (existing) {
   if (mainPhotos.length) form.append('removedImageIds', JSON.stringify(existing.images.map((i) => i.publicId)))
   else form.append('keepExistingImages', 'true')
   const { data } = await api(`/api/products/${existing._id}`, { method: 'PUT', token, form })
+  saved = data
   console.log(`  ✓ updated ${data.slug} (${data.images.length} main photo(s), ${data.colorImages?.length ?? 0} colour galleries)`)
   console.log(`  https://imagoo.bg/produkti/${data.slug}`)
 } else {
   const { data } = await api('/api/products', { method: 'POST', token, form })
+  saved = data
   console.log(`  ✓ created ${data.slug} (${data._id}) with ${data.images.length} photo(s), ${data.colorImages?.length ?? 0} colour galleries`)
   console.log(`  https://imagoo.bg/produkti/${data.slug}`)
 }
 
+// Size prices live on the variants; new variants from a size change start
+// with no stock, so stock is set on every variant here as well
+if (sizePriced || existing) {
+  const priceOf = (size) => sizes.find((s) => s.name === size)?.price
+  const variants = saved.variants.map((v) => ({
+    _id: v._id,
+    stock: product.stockPerColor,
+    price: sizePriced && priceOf(v.size) !== basePrice ? (priceOf(v.size) ?? null) : null,
+  }))
+  await api(`/api/variant-stock/${saved._id}/variants/bulk`, { method: 'PUT', token, json: { variants } })
+  if (sizePriced) console.log(`  sizes: ${sizes.map((s) => `${s.name} ${s.price ?? basePrice} €`).join(', ')}`)
+}
+
 if (typeof product.active === 'boolean') {
-  const id = existing?._id ?? (await api('/api/products?showAll=true&limit=500', { token })).data.find((p) => p.name === product.name)._id
+  const id = saved._id
   await api(`/api/products/${id}`, { method: 'PATCH', token, json: { isActive: product.active } })
   console.log(`  ${product.active ? 'visible in the shop' : 'hidden from the shop'}`)
 }

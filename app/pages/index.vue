@@ -118,7 +118,7 @@ const quick = [
                 <span class="bento__label">{{ t.label }}</span>
                 <span class="bento__tag">
                   <span class="bento__name">{{ t.product.name }}</span>
-                  <span class="bento__price price">{{ formatPrice(t.product.priceCents) }}</span>
+                  <span class="bento__price price">{{ t.product.sizes ? 'от ' : '' }}{{ formatPrice(t.product.priceCents) }}</span>
                   <span class="bento__go" aria-hidden="true"><AppIcon name="arrow-right" :size="18" /></span>
                 </span>
               </NuxtLink>
@@ -190,7 +190,7 @@ const quick = [
               <li v-for="p in playSets" :key="p.slug">
                 <NuxtLink :to="`/produkti/${p.slug}`">
                   <span>{{ p.name }}</span>
-                  <span class="price">{{ formatPrice(p.priceCents) }}</span>
+                  <span class="price">{{ p.sizes ? 'от ' : '' }}{{ formatPrice(p.priceCents) }}</span>
                   <AppIcon name="arrow-right" :size="18" />
                 </NuxtLink>
               </li>
@@ -287,7 +287,7 @@ const quick = [
                   />
                   <span>
                     <strong>{{ g.name }}</strong>
-                    <span class="price">{{ formatPrice(g.priceCents) }}</span>
+                    <span class="price">{{ g.sizes ? 'от ' : '' }}{{ formatPrice(g.priceCents) }}</span>
                   </span>
                 </NuxtLink>
               </li>

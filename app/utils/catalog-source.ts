@@ -4,7 +4,7 @@
  */
 import { categoryPresets } from '~/data/categories'
 import { filaments } from '~/data/filaments'
-import type { Category, ColorVariant, FilamentId, Product, ProductBadge, ProductImage, Swatch } from '~/types/catalog'
+import type { Category, ColorVariant, FilamentId, Product, ProductBadge, ProductImage, SizeOption, Swatch } from '~/types/catalog'
 
 export interface Catalog {
   products: Product[]
@@ -48,6 +48,7 @@ interface ApiVariant {
   color: string
   stock: number
   reserved?: number
+  price?: number | null
 }
 export interface ApiProduct {
   _id: string
@@ -133,6 +134,16 @@ export function mapApiCatalog(apiCategories: ApiCategory[], apiProducts: ApiProd
 
       const original = p.originalPrice && p.originalPrice > p.price ? p.originalPrice : undefined
 
+      // Several sizes: each may carry its own price on its backend variants
+      // (the same for every colour); sizes without one use the product price
+      const sizes: SizeOption[] | undefined =
+        (p.sizes?.length ?? 0) > 1
+          ? p.sizes!.map((s) => {
+              const price = p.variants?.find((v) => v.size === s && v.price != null)?.price
+              return { id: s, name: s, priceCents: cents(price ?? p.price) }
+            })
+          : undefined
+
       return {
         id: p._id,
         slug: p.slug!,
@@ -142,9 +153,10 @@ export function mapApiCatalog(apiCategories: ApiCategory[], apiProducts: ApiProd
         highlights: sf.highlights ?? [],
         category: category.slug,
         alsoIn: (sf.alsoIn ?? []).map((id) => slugById.get(id)).filter((s): s is string => !!s),
-        priceCents: cents(p.price),
-        compareAtCents: original ? cents(original) : undefined,
+        priceCents: sizes ? Math.min(...sizes.map((s) => s.priceCents)) : cents(p.price),
+        compareAtCents: original && !sizes ? cents(original) : undefined,
         variants,
+        sizes,
         personalization: sf.personalization ?? undefined,
         specs: { ...sf.specs, care: sf.specs?.care?.length ? sf.specs.care : undefined },
         notice: sf.notice || undefined,
