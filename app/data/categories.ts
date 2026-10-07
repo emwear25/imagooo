@@ -1,0 +1,99 @@
+import type { Category, CategorySlug } from '~/types/catalog'
+
+export const categories: Category[] = [
+  {
+    slug: 'dom-i-dekoraciya',
+    name: 'Дом и декорация',
+    short: 'Вази, кашпи и форми, които оживяват рафта.',
+    intro:
+      'Скулптурни вази, меки кашпи и купички, които събират дребните неща с характер. Създадени слой по слой, за да внесат цвят и форма в дома без излишен шум.',
+    tint: '#fde9e4',
+    showcase: ['vaza-valna', 'kashpa-oblak', 'vaza-prizma'],
+    seoDescription: 'Вази, кашпи и декоративни купи, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'kuhnya-i-organizaciya',
+    name: 'Кухня и организация',
+    short: 'Щипки, поставки и органайзери за повече ред.',
+    intro:
+      'Малки решения за чекмеджета, шкафове и плот. Модулни органайзери, щипки за пликове и стойки, които помагат всяко нещо да има своето място.',
+    tint: '#e7f3ee',
+    showcase: ['organizer-modul', 'shtipki-zahapka', 'stoyka-etazh'],
+    seoDescription: 'Органайзери, щипки за пликове и стойки за кухнята, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'igrachki-i-zabavlenie',
+    name: 'Играчки и забавление',
+    short: 'Подвижни фигурки и фиджети за бюро и рафт.',
+    intro:
+      'Дракони, октоподи и рибки със ставни части, които се извиват и движат. Направени за любопитни ръце, за бюрото и за колекцията на рафта.',
+    tint: '#efe9fa',
+    showcase: ['oktopod-osmi', 'drakon-iskra', 'ribka-luna'],
+    seoDescription: 'Подвижни фигурки и фиджети, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'aksesoari-i-klyuchodarzhateli',
+    name: 'Аксесоари и ключодържатели',
+    short: 'Ключодържатели с име, жетони и малки знаци.',
+    intro:
+      'Малки неща, които носиш навсякъде. Ключодържатели с име, жетон за количка и форми, вдъхновени от безкрайността в нашето лого.',
+    tint: '#fbf1d9',
+    showcase: ['klyuchodarzhatel-ime', 'klyuchodarzhatel-bezkraynost', 'zheton-kolichka'],
+    seoDescription: 'Ключодържатели с име и аксесоари, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'praktichni-resheniya',
+    name: 'Практични решения',
+    short: 'Стойки, държачи и куки за всеки ден.',
+    intro:
+      'Поставка за телефон, държач за слушалки, клипсове за кабели и органайзер за бюро. Предмети, които решават малък проблем и изглеждат добре, докато го правят.',
+    tint: '#e8eefa',
+    showcase: ['darzhach-daga', 'stoyka-naklon', 'organizer-terasa'],
+    seoDescription: 'Поставки, държачи и органайзери за бюро и дом, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'personalizirani-podaraci',
+    name: 'Персонализирани подаръци',
+    short: 'С име, инициал или кратък надпис.',
+    intro:
+      'Подарък, който носи нечие име. Избери цвят, впиши надписа и ние ще го изработим специално за теб — табелки, моливници и ключодържатели.',
+    tint: '#fdeee8',
+    showcase: ['tabelka-ime', 'molivnik-ime', 'klyuchodarzhatel-ime'],
+    seoDescription: 'Персонализирани подаръци с име, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'komplekti-za-igra',
+    name: 'Комплекти за игра',
+    short: 'Паста, бургер, чаено парти и още — за истинска игра.',
+    intro:
+      'По-големи комплекти, с които играта продължава с часове: кутия паста с купичка и вилица, бургер на етажи, магически отвари, чаен сервиз, шах и писта за топчета.',
+    tint: '#fbeedd',
+    showcase: ['komplekt-pasta', 'komplekt-burger', 'chaen-komplekt'],
+    seoDescription: 'Комплекти за игра — паста, бургер, чаен сервиз, шах и писта за топчета, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'skulpturi-i-art',
+    name: 'Скулптури и арт',
+    short: 'Обекти, които превръщат рафта в малка галерия.',
+    intro:
+      'Скулптурни форми в сатенени и плътни цветове: безкрайна лента, нисък полигонен слон, арки за книги и релефно пано. Създадени да бъдат гледани.',
+    tint: '#eeeae2',
+    showcase: ['skulptura-bezkraynost', 'slon-poligon', 'ogranichiteli-arka'],
+    seoDescription: 'Скулптури, ограничители за книги и стенни пана, изработени с 3D печат — Imagoo.',
+  },
+  {
+    slug: 'praznici-i-sezoni',
+    name: 'Празници и сезони',
+    short: 'Есенни, зимни и празнични акценти — с име по желание.',
+    intro:
+      'Тиква с фини ребра за есенната маса, коледна играчка с име и светилник за LED свещ. Малки ритуали, които правят сезона специален.',
+    tint: '#f6e7dc',
+    showcase: ['tikva-rebro', 'koledna-igrachka-ime', 'svetilnik-korona'],
+    seoDescription: 'Сезонни и празнични декорации и подаръци с име, изработени с 3D печат — Imagoo.',
+  },
+]
+
+export const categoryBySlug = (slug: string): Category | undefined =>
+  categories.find((c) => c.slug === slug)
+
+export const categoryName = (slug: CategorySlug): string => categoryBySlug(slug)?.name ?? ''

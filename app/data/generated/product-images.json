@@ -1,0 +1,1970 @@
+{
+ "vaza-valna": {
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-valna/koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/vaza-valna/koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/vaza-valna/koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-valna/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-valna/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-valna/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "kashpa-oblak": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/kashpa-oblak/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/kashpa-oblak/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/kashpa-oblak/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "praskova": [
+   {
+    "view": "hero",
+    "src": "/images/products/kashpa-oblak/praskova-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/kashpa-oblak/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "vaza-prizma": {
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-prizma/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/vaza-prizma/lilav-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/vaza-prizma/lilav-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "pyasak": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-prizma/pyasak-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-prizma/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "kupa-listo": {
+  "pyasak": [
+   {
+    "view": "hero",
+    "src": "/images/products/kupa-listo/pyasak-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/kupa-listo/pyasak-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/kupa-listo/pyasak-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/kupa-listo/koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/kupa-listo/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "shtipki-zahapka": {
+  "pastelen-miks": [
+   {
+    "view": "hero",
+    "src": "/images/products/shtipki-zahapka/pastelen-miks-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/shtipki-zahapka/pastelen-miks-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/shtipki-zahapka/pastelen-miks-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav-koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/shtipki-zahapka/lilav-koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/shtipki-zahapka/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "organizer-modul": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-modul/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/organizer-modul/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/organizer-modul/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-modul/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-modul/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "stoyka-etazh": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/stoyka-etazh/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/stoyka-etazh/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/stoyka-etazh/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "maslina": [
+   {
+    "view": "hero",
+    "src": "/images/products/stoyka-etazh/maslina-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/stoyka-etazh/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "organizer-kapka": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-kapka/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/organizer-kapka/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/organizer-kapka/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-kapka/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-kapka/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "drakon-iskra": {
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-iskra/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/drakon-iskra/lilav-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/drakon-iskra/lilav-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-iskra/koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-iskra/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "oktopod-osmi": {
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/oktopod-osmi/koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/oktopod-osmi/koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/oktopod-osmi/koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/oktopod-osmi/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "nebe": [
+   {
+    "view": "hero",
+    "src": "/images/products/oktopod-osmi/nebe-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "fidget-mehanizam": {
+  "lilav-koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/fidget-mehanizam/lilav-koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/fidget-mehanizam/lilav-koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/fidget-mehanizam/lilav-koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit-slance": [
+   {
+    "view": "hero",
+    "src": "/images/products/fidget-mehanizam/grafit-slance-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta-mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/fidget-mehanizam/menta-mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "ribka-luna": {
+  "koral-praskova": [
+   {
+    "view": "hero",
+    "src": "/images/products/ribka-luna/koral-praskova-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/ribka-luna/koral-praskova-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/ribka-luna/koral-praskova-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "nebe-mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/ribka-luna/nebe-mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav-lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/ribka-luna/lilav-lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "klyuchodarzhatel-ime": {
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-ime/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/klyuchodarzhatel-ime/lilav-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/klyuchodarzhatel-ime/lilav-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-ime/koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-ime/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-ime/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "klyuchodarzhatel-bezkraynost": {
+  "lilav-koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-bezkraynost/lilav-koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/klyuchodarzhatel-bezkraynost/lilav-koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/klyuchodarzhatel-bezkraynost/lilav-koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit-slance": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-bezkraynost/grafit-slance-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula-menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-bezkraynost/lavandula-menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "zheton-kolichka": {
+  "lilav-koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/zheton-kolichka/lilav-koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/zheton-kolichka/lilav-koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/zheton-kolichka/lilav-koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta-slance": [
+   {
+    "view": "hero",
+    "src": "/images/products/zheton-kolichka/menta-slance-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit-mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/zheton-kolichka/grafit-mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "stoyka-naklon": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/stoyka-naklon/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/stoyka-naklon/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/stoyka-naklon/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/stoyka-naklon/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/stoyka-naklon/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/stoyka-naklon/koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "klips-kabeli": {
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/klips-kabeli/koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/klips-kabeli/koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/klips-kabeli/koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/klips-kabeli/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/klips-kabeli/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "darzhach-daga": {
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/darzhach-daga/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/darzhach-daga/lilav-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/darzhach-daga/lilav-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/darzhach-daga/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/darzhach-daga/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "organizer-terasa": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-terasa/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/organizer-terasa/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/organizer-terasa/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-terasa/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/organizer-terasa/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "kuki-stena": {
+  "miks": [
+   {
+    "view": "hero",
+    "src": "/images/products/kuki-stena/miks-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/kuki-stena/miks-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/kuki-stena/miks-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/kuki-stena/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/kuki-stena/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "tabelka-ime": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/tabelka-ime/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/tabelka-ime/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/tabelka-ime/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/tabelka-ime/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/tabelka-ime/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "molivnik-ime": {
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/molivnik-ime/koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/molivnik-ime/koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/molivnik-ime/koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/molivnik-ime/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/molivnik-ime/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "komplekt-pasta": {
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/komplekt-pasta/koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/komplekt-pasta/koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/komplekt-pasta/koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/komplekt-pasta/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/komplekt-pasta/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "komplekt-burger": {
+  "klasik": [
+   {
+    "view": "hero",
+    "src": "/images/products/komplekt-burger/klasik-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/komplekt-burger/klasik-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/komplekt-burger/klasik-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "pastelen": [
+   {
+    "view": "hero",
+    "src": "/images/products/komplekt-burger/pastelen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "komplekt-otvari": {
+  "magiya": [
+   {
+    "view": "hero",
+    "src": "/images/products/komplekt-otvari/magiya-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/komplekt-otvari/magiya-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/komplekt-otvari/magiya-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "gora": [
+   {
+    "view": "hero",
+    "src": "/images/products/komplekt-otvari/gora-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "chaen-komplekt": {
+  "mlechen-koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/chaen-komplekt/mlechen-koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/chaen-komplekt/mlechen-koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/chaen-komplekt/mlechen-koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/chaen-komplekt/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/chaen-komplekt/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "shah-prizma": {
+  "klasik": [
+   {
+    "view": "hero",
+    "src": "/images/products/shah-prizma/klasik-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/shah-prizma/klasik-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/shah-prizma/klasik-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "imagoo": [
+   {
+    "view": "hero",
+    "src": "/images/products/shah-prizma/imagoo-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "pista-topcheta": {
+  "duga": [
+   {
+    "view": "hero",
+    "src": "/images/products/pista-topcheta/duga-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/pista-topcheta/duga-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/pista-topcheta/duga-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "nebe": [
+   {
+    "view": "hero",
+    "src": "/images/products/pista-topcheta/nebe-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "drakon-vihar": {
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-vihar/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/drakon-vihar/zlato-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/drakon-vihar/zlato-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "med": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-vihar/med-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "sedef-lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-vihar/sedef-lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "skulptura-bezkraynost": {
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/skulptura-bezkraynost/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/skulptura-bezkraynost/zlato-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/skulptura-bezkraynost/zlato-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/skulptura-bezkraynost/koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "sedef": [
+   {
+    "view": "hero",
+    "src": "/images/products/skulptura-bezkraynost/sedef-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "slon-poligon": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/slon-poligon/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/slon-poligon/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/slon-poligon/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/slon-poligon/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/slon-poligon/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/slon-poligon/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "ogranichiteli-arka": {
+  "zalez": [
+   {
+    "view": "hero",
+    "src": "/images/products/ogranichiteli-arka/zalez-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/ogranichiteli-arka/zalez-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/ogranichiteli-arka/zalez-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zemya": [
+   {
+    "view": "hero",
+    "src": "/images/products/ogranichiteli-arka/zemya-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/ogranichiteli-arka/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "pano-vulni": {
+  "zalez": [
+   {
+    "view": "hero",
+    "src": "/images/products/pano-vulni/zalez-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/pano-vulni/zalez-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/pano-vulni/zalez-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "okean": [
+   {
+    "view": "hero",
+    "src": "/images/products/pano-vulni/okean-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/pano-vulni/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "svetilnik-korona": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/svetilnik-korona/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/svetilnik-korona/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/svetilnik-korona/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/svetilnik-korona/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/svetilnik-korona/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "tikva-rebro": {
+  "pyasak": [
+   {
+    "view": "hero",
+    "src": "/images/products/tikva-rebro/pyasak-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/tikva-rebro/pyasak-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/tikva-rebro/pyasak-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "praskova": [
+   {
+    "view": "hero",
+    "src": "/images/products/tikva-rebro/praskova-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "sedef": [
+   {
+    "view": "hero",
+    "src": "/images/products/tikva-rebro/sedef-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/tikva-rebro/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "koledna-igrachka-ime": {
+  "cherven": [
+   {
+    "view": "hero",
+    "src": "/images/products/koledna-igrachka-ime/cherven-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/koledna-igrachka-ime/cherven-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/koledna-igrachka-ime/cherven-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/koledna-igrachka-ime/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "sedef": [
+   {
+    "view": "hero",
+    "src": "/images/products/koledna-igrachka-ime/sedef-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "klyuchodarzhatel-geroi": {
+  "meche": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-geroi/meche-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/klyuchodarzhatel-geroi/meche-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/klyuchodarzhatel-geroi/meche-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "kote": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-geroi/kote-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "raketa": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-geroi/raketa-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "tabela-semeystvo": {
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/tabela-semeystvo/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/tabela-semeystvo/mlechen-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/tabela-semeystvo/mlechen-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "maslina": [
+   {
+    "view": "hero",
+    "src": "/images/products/tabela-semeystvo/maslina-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/tabela-semeystvo/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "etiket-lyubimets": {
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/etiket-lyubimets/koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/etiket-lyubimets/koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/etiket-lyubimets/koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "nebe": [
+   {
+    "view": "hero",
+    "src": "/images/products/etiket-lyubimets/nebe-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/etiket-lyubimets/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "obemni-bukvi": {
+  "pastelni": [
+   {
+    "view": "hero",
+    "src": "/images/products/obemni-bukvi/pastelni-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/obemni-bukvi/pastelni-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/obemni-bukvi/pastelni-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/obemni-bukvi/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/obemni-bukvi/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "vaza-roza": {
+  "cherven": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-roza/cherven-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/vaza-roza/cherven-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/vaza-roza/cherven-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "praskova": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-roza/praskova-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "sedef": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-roza/sedef-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "vaza-tetrahex": {
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-tetrahex/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/vaza-tetrahex/zlato-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/vaza-tetrahex/zlato-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-tetrahex/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "mlechen": [
+   {
+    "view": "hero",
+    "src": "/images/products/vaza-tetrahex/mlechen-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "ogranichiteli-kristal": {
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/ogranichiteli-kristal/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/ogranichiteli-kristal/lavandula-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/ogranichiteli-kristal/lavandula-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "sedef": [
+   {
+    "view": "hero",
+    "src": "/images/products/ogranichiteli-kristal/sedef-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/ogranichiteli-kristal/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "pano-bonsai": {
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/pano-bonsai/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/pano-bonsai/grafit-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/pano-bonsai/grafit-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "maslina": [
+   {
+    "view": "hero",
+    "src": "/images/products/pano-bonsai/maslina-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/pano-bonsai/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "drakon-kristal": {
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-kristal/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/drakon-kristal/lavandula-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/drakon-kristal/lavandula-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-kristal/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/drakon-kristal/menta-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "yaytse-drakon": {
+  "med": [
+   {
+    "view": "hero",
+    "src": "/images/products/yaytse-drakon/med-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/yaytse-drakon/med-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/yaytse-drakon/med-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "sedef": [
+   {
+    "view": "hero",
+    "src": "/images/products/yaytse-drakon/sedef-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav-koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/yaytse-drakon/lilav-koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "flexi-reks": {
+  "menta": [
+   {
+    "view": "hero",
+    "src": "/images/products/flexi-reks/menta-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/flexi-reks/menta-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/flexi-reks/menta-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/flexi-reks/koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "nebe": [
+   {
+    "view": "hero",
+    "src": "/images/products/flexi-reks/nebe-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "kutiya-pazel": {
+  "pyasak-grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/kutiya-pazel/pyasak-grafit-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/kutiya-pazel/pyasak-grafit-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/kutiya-pazel/pyasak-grafit-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lilav-koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/kutiya-pazel/lilav-koral-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "shah-heksagon": {
+  "klasik": [
+   {
+    "view": "hero",
+    "src": "/images/products/shah-heksagon/klasik-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/shah-heksagon/klasik-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/shah-heksagon/klasik-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "imagoo": [
+   {
+    "view": "hero",
+    "src": "/images/products/shah-heksagon/imagoo-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "ornament-ime": {
+  "cherven": [
+   {
+    "view": "hero",
+    "src": "/images/products/ornament-ime/cherven-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/ornament-ime/cherven-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/ornament-ime/cherven-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/ornament-ime/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "nebe": [
+   {
+    "view": "hero",
+    "src": "/images/products/ornament-ime/nebe-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "medalion-sarce": {
+  "koral": [
+   {
+    "view": "hero",
+    "src": "/images/products/medalion-sarce/koral-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/medalion-sarce/koral-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/medalion-sarce/koral-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "lavandula": [
+   {
+    "view": "hero",
+    "src": "/images/products/medalion-sarce/lavandula-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "zlato": [
+   {
+    "view": "hero",
+    "src": "/images/products/medalion-sarce/zlato-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ },
+ "klyuchodarzhatel-skript": {
+  "lilav": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-skript/lilav-hero",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "side",
+    "src": "/images/products/klyuchodarzhatel-skript/lilav-side",
+    "width": 1200,
+    "height": 1500
+   },
+   {
+    "view": "top",
+    "src": "/images/products/klyuchodarzhatel-skript/lilav-top",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "praskova": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-skript/praskova-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ],
+  "grafit": [
+   {
+    "view": "hero",
+    "src": "/images/products/klyuchodarzhatel-skript/grafit-hero",
+    "width": 1200,
+    "height": 1500
+   }
+  ]
+ }
+}
