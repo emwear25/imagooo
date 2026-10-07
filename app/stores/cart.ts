@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { store as config } from '~/config/store'
-import { productBySlug } from '~/data/products'
-import type { CartLine, Product } from '~/types/catalog'
+import { useCatalogStore } from '~/stores/catalog'
+import type { CartLine, ColorVariant, Product } from '~/types/catalog'
 
 export const MAX_QTY = 20
 
@@ -11,6 +11,7 @@ export function lineKey(slug: string, variantId: string, personalization?: strin
 
 export interface ResolvedLine extends CartLine {
   product: Product
+  variant: ColorVariant
   variantName: string
   lineTotalCents: number
 }
@@ -24,12 +25,17 @@ export const useCartStore = defineStore('cart', {
 
   getters: {
     resolved(state): ResolvedLine[] {
+      const catalog = useCatalogStore()
       return state.lines.flatMap((l) => {
-        const product = productBySlug(l.slug)
+        const product = catalog.bySlug(l.slug)
         const variant = product?.variants.find((v) => v.id === l.variantId)
         if (!product || !variant) return []
-        return [{ ...l, product, variantName: variant.name, lineTotalCents: product.priceCents * l.quantity }]
+        return [{ ...l, product, variant, variantName: variant.name, lineTotalCents: product.priceCents * l.quantity }]
       })
+    },
+    /** Lines whose colour is out of stock in the backend. */
+    unavailable(): ResolvedLine[] {
+      return this.resolved.filter((l) => l.variant.available === false)
     },
     count(): number {
       return this.resolved.reduce((n, l) => n + l.quantity, 0)
@@ -72,8 +78,9 @@ export const useCartStore = defineStore('cart', {
         const raw = localStorage.getItem(config.storage.cartKey)
         const parsed = raw ? (JSON.parse(raw) as CartLine[]) : []
         // keep only lines that still match the catalogue
+        const catalog = useCatalogStore()
         this.lines = Array.isArray(parsed)
-          ? parsed.filter((l) => productBySlug(l.slug)?.variants.some((v) => v.id === l.variantId))
+          ? parsed.filter((l) => catalog.bySlug(l.slug)?.variants.some((v) => v.id === l.variantId))
           : []
       } catch {
         this.lines = []

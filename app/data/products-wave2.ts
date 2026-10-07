@@ -1,11 +1,11 @@
-import type { Product } from '~/types/catalog'
+import type { DemoProduct } from '~/types/catalog'
 import { PLA, SILK_PLA, careDecor, careSoft, playSetNotice, toyNotice } from './product-copy'
 
 /**
  * Second wave: play sets, premium decor, seasonal and personalised items.
  * Original designs inspired by popular product genres (see docs/ASSET-SOURCES.md). Demo data.
  */
-export const wave2: Product[] = [
+export const wave2: DemoProduct[] = [
   // ------------------------------------------------------------ Комплекти за игра
   {
     id: 'p23', slug: 'komplekt-pasta', name: 'Комплект за игра „Паста“', tagline: 'Кутия, купичка, вилица и паста в четири форми',

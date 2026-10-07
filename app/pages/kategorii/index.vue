@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { categories } from '~/data/categories'
+const { categories } = useCatalog()
 
 useSeo({
   title: 'Категории',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { categories } from '~/data/categories'
 import { store } from '~/config/store'
+const { categories, canOrder } = useCatalog()
 
 const year = new Date().getFullYear()
 const c = store.company
@@ -57,11 +57,14 @@ const c = store.company
               </li>
             </ul>
             <NuxtLink to="/kontakti" class="ftr__more">Форма за контакт</NuxtLink>
+            <NewsletterForm class="ftr__nl" />
           </div>
         </div>
 
         <div class="ftr__bottom">
-          <p>© {{ year }} {{ store.brand.legalDisplayName }}. Демонстрационна версия — цените и наличностите са примерни.</p>
+          <p>
+            © {{ year }} {{ c.legalName.value }} · {{ store.brand.name }}<template v-if="!canOrder">. Демонстрационна версия — цените и наличностите са примерни.</template>
+          </p>
           <ul>
             <li><NuxtLink to="/obshti-usloviya">Общи условия</NuxtLink></li>
             <li><NuxtLink to="/poveritelnost">Поверителност</NuxtLink></li>
@@ -157,6 +160,9 @@ const c = store.company
     border-color: rgb(255 255 255 / 30%);
     color: #e9e1f7;
   }
+}
+.ftr__nl {
+  margin-top: 20px;
 }
 .ftr__col .ftr__more {
   margin-top: 10px;

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { categories } from '~/data/categories'
-import { products, productBySlug } from '~/data/products'
 import { faq } from '~/data/faq'
-import { cutoutImage, sortProducts, srcset } from '~/utils/catalog'
+import { cutoutImage, imageUrl, inCategory, sortProducts, srcset } from '~/utils/catalog'
+import type { Product } from '~/types/catalog'
 import { formatPrice } from '~/utils/format'
 import { PERSONALIZATION_PATTERN } from '~/utils/text'
 
@@ -13,21 +12,40 @@ useSeo({
   path: '/',
 })
 
-const heroTiles = [
-  { slug: 'vaza-valna', tint: '#fde4dc', label: 'За рафта' },
-  { slug: 'komplekt-pasta', tint: '#e6f2ec', label: 'За игра' },
-  { slug: 'klyuchodarzhatel-geroi', tint: '#ece4fb', label: 'С твоето име' },
-].map((t) => {
-  const p = productBySlug(t.slug)!
-  return { ...t, product: p, img: cutoutImage(p) }
-})
+const { products, categories, productBySlug } = useCatalog()
 
-const featured = computed(() => sortProducts(products.filter((p) => p.featured), 'recommended').slice(0, 8))
-const everyday = computed(() =>
-  sortProducts(products.filter((p) => p.everyday), 'recommended').slice(0, 4),
+/**
+ * Curated picks by slug, topped up from the catalogue when some of them are
+ * not (or no longer) in the shop - real products replace the demo ones.
+ */
+function pick(slugs: string[], fallback: (p: Product) => boolean, count = slugs.length): Product[] {
+  const chosen = slugs.map((s) => productBySlug(s)).filter((p): p is Product => !!p)
+  const rest = sortProducts(products.value.filter((p) => fallback(p) && !chosen.includes(p)), 'recommended')
+  return [...chosen, ...rest].slice(0, count)
+}
+
+const HERO_STYLE = [
+  { tint: '#fde4dc', label: 'За рафта' },
+  { tint: '#e6f2ec', label: 'За игра' },
+  { tint: '#ece4fb', label: 'С твоето име' },
+]
+const heroTiles = computed(() =>
+  pick(['vaza-valna', 'komplekt-pasta', 'klyuchodarzhatel-geroi'], (p) => !!p.featured, 3).map((p, i) => ({
+    ...HERO_STYLE[i]!,
+    slug: p.slug,
+    product: p,
+    img: cutoutImage(p),
+  })),
 )
-const playSets = ['komplekt-pasta', 'komplekt-otvari', 'shah-prizma', 'pista-topcheta'].map((s) => productBySlug(s)!)
-const playHero = cutoutImage(playSets[0]!)
+
+const featured = computed(() => sortProducts(products.value.filter((p) => p.featured), 'recommended').slice(0, 8))
+const everyday = computed(() =>
+  sortProducts(products.value.filter((p) => p.everyday), 'recommended').slice(0, 4),
+)
+const playSets = computed(() =>
+  pick(['komplekt-pasta', 'komplekt-otvari', 'shah-prizma', 'pista-topcheta'], (p) => inCategory(p, 'komplekti-za-igra'), 4),
+)
+const playHero = computed(() => (playSets.value[0] ? cutoutImage(playSets.value[0]) : undefined))
 
 const homeFaq = faq.filter((f) => [0, 4, 6, 8].includes(faq.indexOf(f)))
 
@@ -35,8 +53,8 @@ const homeFaq = faq.filter((f) => [0, 4, 6, 8].includes(faq.indexOf(f)))
 const name = ref('')
 const preview = computed(() => name.value.trim() || 'Мила')
 const nameValid = computed(() => PERSONALIZATION_PATTERN.test(name.value))
-const keychain = productBySlug('klyuchodarzhatel-ime')!
-const gifts = ['klyuchodarzhatel-geroi', 'tabela-semeystvo', 'obemni-bukvi'].map((s) => productBySlug(s)!)
+const keychain = computed(() => pick(['klyuchodarzhatel-ime'], (p) => !!p.personalization, 1)[0])
+const gifts = computed(() => pick(['klyuchodarzhatel-geroi', 'tabela-semeystvo', 'obemni-bukvi'], (p) => !!p.personalization, 3))
 
 const quick = [
   { label: 'Подаръци с име', to: '/kategorii/personalizirani-podaraci' },
@@ -91,8 +109,8 @@ const quick = [
               <NuxtLink :to="`/produkti/${t.slug}`" class="bento__link">
                 <img
                   v-if="t.img"
-                  :src="`${t.img.src}-800.webp`"
-                  :srcset="srcset(t.img.src)"
+                  :src="imageUrl(t.img)"
+                  :srcset="srcset(t.img)"
                   :sizes="i === 0 ? '(min-width: 1024px) 26vw, 50vw' : '(min-width: 1024px) 24vw, 50vw'"
                   :width="t.img.width"
                   :height="t.img.height"
@@ -150,14 +168,14 @@ const quick = [
     </section>
 
     <!-- ============================================================ PLAY SETS -->
-    <section class="section section--tight-top" aria-labelledby="play-title">
+    <section v-if="playSets.length" class="section section--tight-top" aria-labelledby="play-title">
       <div class="container">
         <div class="play">
           <NuxtLink :to="`/produkti/${playSets[0]!.slug}`" class="play__visual" :aria-label="playSets[0]!.name">
             <img
               v-if="playHero"
-              :src="`${playHero.src}-1200.webp`"
-              :srcset="srcset(playHero.src)"
+              :src="imageUrl(playHero, 1200)"
+              :srcset="srcset(playHero)"
               sizes="(min-width: 1024px) 45vw, 100vw"
               :width="playHero.width"
               :height="playHero.height"
@@ -227,7 +245,7 @@ const quick = [
               впиши надписа — и го създаваме специално за теб.
             </p>
 
-            <form class="gift__try" @submit.prevent="navigateTo({ path: `/produkti/${keychain.slug}`, query: name.trim() && nameValid ? { nadpis: name.trim() } : {} })">
+            <form v-if="keychain" class="gift__try" @submit.prevent="navigateTo({ path: `/produkti/${keychain.slug}`, query: name.trim() && nameValid ? { nadpis: name.trim() } : {} })">
               <div class="field">
                 <label for="gift-name">Опитай с име</label>
                 <div class="gift__row">
@@ -265,7 +283,7 @@ const quick = [
                 <NuxtLink :to="`/produkti/${g.slug}`" class="gift__mini">
                   <img
                     v-if="cutoutImage(g)"
-                    :src="`${cutoutImage(g)!.src}-480.webp`"
+                    :src="imageUrl(cutoutImage(g)!, 480)"
                     alt=""
                     width="480"
                     height="600"

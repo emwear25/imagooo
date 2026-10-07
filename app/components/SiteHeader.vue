@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { categories } from '~/data/categories'
-import { productBySlug } from '~/data/products'
-import { cutoutImage } from '~/utils/catalog'
+import { cutoutImage, imageUrl } from '~/utils/catalog'
 import { useCartStore } from '~/stores/cart'
 import { useWishlistStore } from '~/stores/wishlist'
 import { useUiStore } from '~/stores/ui'
-import { store } from '~/config/store'
 
+const { categories, productBySlug, canOrder } = useCatalog()
 const cart = useCartStore()
 const wishlist = useWishlistStore()
 const ui = useUiStore()
@@ -21,7 +19,7 @@ const catPanelId = useId()
 const thumb = (slug: string) => {
   const p = productBySlug(slug)
   const img = p && cutoutImage(p)
-  return img ? `${img.src}-480.webp` : undefined
+  return img ? imageUrl(img, 480) : undefined
 }
 
 watch(
@@ -53,7 +51,7 @@ const badge = (n: number) => (n > 99 ? '99+' : String(n))
 </script>
 
 <template>
-  <div class="demo-bar" v-if="store.site.isDemo">
+  <div class="demo-bar" v-if="!canOrder">
     <div class="container demo-bar__inner">
       <AppIcon name="info" :size="16" />
       <p>
@@ -94,7 +92,7 @@ const badge = (n: number) => (n > 99 ? '99+' : String(n))
                 <li v-for="c in categories" :key="c.slug">
                   <NuxtLink :to="`/kategorii/${c.slug}`" class="hdr__megaLink">
                     <span class="hdr__megaImg" :style="{ background: c.tint }">
-                      <img v-if="thumb(c.showcase[0]!)" :src="thumb(c.showcase[0]!)" alt="" width="64" height="80" loading="lazy" />
+                      <img v-if="c.showcase[0] && thumb(c.showcase[0])" :src="thumb(c.showcase[0])" alt="" width="64" height="80" loading="lazy" />
                     </span>
                     <span>
                       <strong>{{ c.name }}</strong>
@@ -166,7 +164,7 @@ const badge = (n: number) => (n > 99 ? '99+' : String(n))
         <li v-for="c in categories" :key="c.slug">
           <NuxtLink :to="`/kategorii/${c.slug}`">
             <span class="mnav__thumb" :style="{ background: c.tint }">
-              <img v-if="thumb(c.showcase[0]!)" :src="thumb(c.showcase[0]!)" alt="" width="40" height="50" loading="lazy" />
+              <img v-if="c.showcase[0] && thumb(c.showcase[0])" :src="thumb(c.showcase[0])" alt="" width="40" height="50" loading="lazy" />
             </span>
             {{ c.name }}
           </NuxtLink>

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { categories, categoryBySlug } from '~/data/categories'
-import { productBySlug } from '~/data/products'
-import { cutoutImage, srcset } from '~/utils/catalog'
+import { cutoutImage, imageUrl, srcset } from '~/utils/catalog'
 
 const route = useRoute()
+const { categories, categoryBySlug, productBySlug } = useCatalog()
 const category = computed(() => categoryBySlug(String(route.params.slug)))
 
 if (!category.value) {
@@ -13,7 +12,7 @@ if (!category.value) {
 const art = computed(() =>
   (category.value?.showcase ?? []).map((s) => productBySlug(s)).filter((p) => !!p).map((p) => ({ p: p!, img: cutoutImage(p!) })),
 )
-const others = computed(() => categories.filter((c) => c.slug !== category.value?.slug))
+const others = computed(() => categories.value.filter((c) => c.slug !== category.value?.slug))
 
 useSeo(() => ({
   title: category.value?.name ?? 'Категория',
@@ -38,8 +37,8 @@ useSeo(() => ({
         <img
           v-for="(a, i) in art"
           :key="a.p.slug"
-          :src="a.img ? `${a.img.src}-800.webp` : undefined"
-          :srcset="a.img ? srcset(a.img.src) : undefined"
+          :src="a.img ? imageUrl(a.img) : undefined"
+          :srcset="a.img ? srcset(a.img) : undefined"
           sizes="(min-width: 1024px) 18vw, 34vw"
           alt=""
           width="1200"

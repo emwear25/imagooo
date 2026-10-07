@@ -1,10 +1,24 @@
 <script setup lang="ts">
 import { useCartStore } from '~/stores/cart'
 import { formatPrice, pluralItems } from '~/utils/format'
-import { productImages } from '~/utils/catalog'
+import { productImages, imageUrl } from '~/utils/catalog'
+import { store } from '~/config/store'
 
-withDefaults(defineProps<{ showItems?: boolean; title?: string }>(), { showItems: false, title: 'Обобщение' })
+const props = withDefaults(
+  defineProps<{
+    showItems?: boolean
+    title?: string
+    discountCents?: number
+    discountLabel?: string
+    /** Courier estimate in EUR (paid on delivery); null/undefined = not known yet. */
+    shippingEur?: number | null
+    freeShipping?: boolean
+  }>(),
+  { showItems: false, title: 'Обобщение', discountCents: 0 },
+)
 const cart = useCartStore()
+const totalCents = computed(() => cart.subtotalCents - props.discountCents)
+const free = computed(() => props.freeShipping ?? totalCents.value >= store.shipping.freeShippingThresholdEur * 100)
 </script>
 
 <template>
@@ -15,7 +29,7 @@ const cart = useCartStore()
         <span class="sum__thumb">
           <img
             v-if="productImages(l.product, l.variantId)[0]"
-            :src="`${productImages(l.product, l.variantId)[0]!.src}-480.webp`"
+            :src="imageUrl(productImages(l.product, l.variantId)[0]!, 480)"
             alt=""
             width="56"
             height="70"
@@ -35,23 +49,35 @@ const cart = useCartStore()
         <dt>Продукти ({{ pluralItems(cart.count) }})</dt>
         <dd class="price">{{ formatPrice(cart.subtotalCents) }}</dd>
       </div>
+      <div v-if="discountCents > 0">
+        <dt>{{ discountLabel ?? 'Отстъпка' }}</dt>
+        <dd class="price sum__discount">−{{ formatPrice(discountCents) }}</dd>
+      </div>
       <div>
         <dt>Доставка</dt>
-        <dd class="sum__pending">предстои уточняване</dd>
+        <dd v-if="free" class="sum__free">Безплатна</dd>
+        <dd v-else-if="shippingEur != null" class="price">~{{ formatPrice(Math.round(shippingEur * 100)) }}</dd>
+        <dd v-else class="sum__pending">според куриера</dd>
       </div>
       <div class="sum__total">
-        <dt>Общо без доставка</dt>
-        <dd class="price">{{ formatPrice(cart.subtotalCents) }}</dd>
+        <dt>Общо</dt>
+        <dd class="price">{{ formatPrice(totalCents) }}</dd>
       </div>
     </dl>
     <p class="sum__note">
-      Цените са демонстрационни. Цената за доставка не е определена и не е включена в сумата.
+      Цените включват ДДС.
+      <template v-if="!free">Доставката се плаща на куриера при получаване. Безплатна {{ store.shipping.freeShippingThreshold.value }}.</template>
     </p>
     <slot />
   </div>
 </template>
 
 <style scoped lang="scss">
+.sum__discount,
+.sum__free {
+  color: var(--success);
+  font-weight: 600;
+}
 .sum {
   display: grid;
   gap: 16px;

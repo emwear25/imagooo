@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Product } from '~/types/catalog'
-import { productImages } from '~/utils/catalog'
+import { productImages, imageUrl } from '~/utils/catalog'
 import { useCartStore } from '~/stores/cart'
 import { useWishlistStore } from '~/stores/wishlist'
 import { useUiStore } from '~/stores/ui'
@@ -14,7 +14,7 @@ const cart = useCartStore()
 const wishlist = useWishlistStore()
 const ui = useUiStore()
 
-const variantId = ref(props.product.variants[0]!.id)
+const variantId = ref((props.product.variants.find((v) => v.available !== false) ?? props.product.variants[0]!).id)
 const variant = computed(() => props.product.variants.find((v) => v.id === variantId.value)!)
 const imgs = computed(() => productImages(props.product, variantId.value))
 const hoverImg = computed(() => imgs.value.find((i) => i.view === 'side'))
@@ -39,7 +39,7 @@ function quickAdd() {
   ui.toast({
     title: 'Добавено в количката',
     body: `${props.product.name} · ${variant.value.name}`,
-    image: img ? `${img.src}-480.webp` : undefined,
+    image: img ? imageUrl(img, 480) : undefined,
     action: { label: 'Към количката', to: '/kolichka' },
     tone: 'success',
   })
@@ -96,11 +96,12 @@ function toggleWish() {
       </div>
 
       <div class="card__foot">
-        <PriceTag :cents="product.priceCents" />
+        <PriceTag :cents="product.priceCents" :compare-at-cents="product.compareAtCents" />
         <NuxtLink v-if="needsInput" :to="to" class="btn btn--ghost btn--sm card__action">
           <AppIcon name="pen" />
           Персонализирай
         </NuxtLink>
+        <span v-else-if="variant.available === false" class="card__soldout">Изчерпан</span>
         <button v-else type="button" class="btn btn--sm card__action" @click="quickAdd">
           <AppIcon name="bag" />
           Добави
@@ -112,6 +113,11 @@ function toggleWish() {
 </template>
 
 <style scoped lang="scss">
+.card__soldout {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
 .card {
   position: relative;
   display: flex;

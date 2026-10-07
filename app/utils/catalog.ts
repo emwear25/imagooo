@@ -1,21 +1,16 @@
-import manifest from '~/data/generated/product-images.json'
-import cutouts from '~/data/generated/product-cutouts.json'
-import { products } from '~/data/products'
 import type { CategorySlug, FilamentId, Product, ProductImage } from '~/types/catalog'
 import { normalize, transliterate } from './text'
 
-type Manifest = Record<string, Record<string, ProductImage[]>>
-const images = manifest as Manifest
-
 export const IMAGE_WIDTHS = [480, 800, 1200] as const
 
-/** Images for a product variant: the variant's own shot first, then the remaining angles. */
+/** Images for a product variant: the variant's own shots first, then the remaining angles of the default colour. */
 export function productImages(product: Product, variantId?: string): (ProductImage & { variantId: string })[] {
-  const byVariant = images[product.slug] ?? {}
-  const vid = variantId && byVariant[variantId] ? variantId : product.variants[0]!.id
+  const byVariant = product.images
+  const vid = variantId && byVariant[variantId]?.length ? variantId : product.variants[0]!.id
   const own = (byVariant[vid] ?? []).map((i) => ({ ...i, variantId: vid }))
   const def = product.variants[0]!.id
-  const extra = vid === def ? [] : (byVariant[def] ?? []).filter((i) => i.view !== 'hero').map((i) => ({ ...i, variantId: def }))
+  const extra =
+    vid === def ? [] : (byVariant[def] ?? []).filter((i) => !own.some((o) => o.src === i.src) && i.view !== 'hero').map((i) => ({ ...i, variantId: def }))
   return [...own, ...extra]
 }
 
@@ -23,15 +18,29 @@ export function primaryImage(product: Product, variantId?: string) {
   return productImages(product, variantId)[0]
 }
 
-/** White-ground render (soft shadow, no backdrop) for tinted tiles; falls back to the studio shot. */
+/** White-ground render (soft shadow, no backdrop) for tinted tiles; falls back to the main image. */
 export function cutoutImage(product: Product): ProductImage | undefined {
-  const c = (cutouts as Record<string, { src: string; width: number; height: number }>)[product.slug]
-  if (c) return { view: 'hero', src: c.src, width: c.width, height: c.height }
-  return primaryImage(product)
+  return product.cutout ?? primaryImage(product)
 }
 
-export function srcset(src: string): string {
-  return IMAGE_WIDTHS.map((w) => `${src}-${w}.webp ${w}w`).join(', ')
+/** Cloudinary delivery URL resized to `width` (auto format/quality). */
+function cloudinaryAt(url: string, width: number): string | null {
+  const i = url.indexOf('/image/upload/')
+  if (!url.includes('res.cloudinary.com') || i < 0) return null
+  const at = i + '/image/upload/'.length
+  return `${url.slice(0, at)}w_${width},c_limit,f_auto,q_auto/${url.slice(at)}`
+}
+
+/** URL of an image at (about) the given width. */
+export function imageUrl(image: ProductImage, width: (typeof IMAGE_WIDTHS)[number] = 800): string {
+  if (!image.remote) return `${image.src}-${width}.webp`
+  return cloudinaryAt(image.src, width) ?? image.src
+}
+
+/** Responsive srcset, or undefined when the image only exists in one size. */
+export function srcset(image: ProductImage): string | undefined {
+  if (image.remote && !cloudinaryAt(image.src, 480)) return undefined
+  return IMAGE_WIDTHS.map((w) => `${imageUrl(image, w)} ${w}w`).join(', ')
 }
 
 export function inCategory(p: Product, slug: CategorySlug): boolean {
@@ -43,7 +52,7 @@ export function productFilaments(p: Product): Set<FilamentId> {
 }
 
 /** Lightweight relevance search across name, tagline, tags and transliterated slug. */
-export function searchProducts(query: string, list: Product[] = products): Product[] {
+export function searchProducts(query: string, list: Product[]): Product[] {
   const q = normalize(query)
   if (!q) return list
   const terms = q.split(' ').filter(Boolean)
@@ -100,7 +109,7 @@ export const PRICE_BANDS: PriceBand[] = [
 ]
 
 /** Related: same category first, then shared tags. */
-export function relatedProducts(p: Product, limit = 4): Product[] {
+export function relatedProducts(p: Product, products: Product[], limit = 4): Product[] {
   return products
     .filter((o) => o.slug !== p.slug)
     .map((o) => ({

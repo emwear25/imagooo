@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { store as config } from '~/config/store'
-import { productBySlug } from '~/data/products'
+import { useCatalogStore } from '~/stores/catalog'
 
 export const useWishlistStore = defineStore('wishlist', {
   state: () => ({
@@ -11,7 +11,10 @@ export const useWishlistStore = defineStore('wishlist', {
   getters: {
     count: (state) => state.slugs.length,
     has: (state) => (slug: string) => state.slugs.includes(slug),
-    products: (state) => state.slugs.map((s) => productBySlug(s)).filter((p) => !!p),
+    products: (state) => {
+      const catalog = useCatalogStore()
+      return state.slugs.map((s) => catalog.bySlug(s)).filter((p) => !!p)
+    },
   },
 
   actions: {
@@ -36,7 +39,8 @@ export const useWishlistStore = defineStore('wishlist', {
       try {
         const raw = localStorage.getItem(config.storage.wishlistKey)
         const parsed = raw ? (JSON.parse(raw) as string[]) : []
-        this.slugs = Array.isArray(parsed) ? parsed.filter((s) => productBySlug(s)) : []
+        const catalog = useCatalogStore()
+        this.slugs = Array.isArray(parsed) ? parsed.filter((s) => catalog.bySlug(s)) : []
       } catch {
         this.slugs = []
       }

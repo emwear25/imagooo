@@ -1,16 +1,24 @@
 <script setup lang="ts">
 import { formatPrice } from '~/utils/format'
 
-withDefaults(defineProps<{ cents: number; size?: 'md' | 'lg' }>(), { size: 'md' })
+withDefaults(defineProps<{ cents: number; compareAtCents?: number; size?: 'md' | 'lg' }>(), { size: 'md' })
 </script>
 
 <template>
   <p class="ptag" :class="`ptag--${size}`">
-    <span class="price">{{ formatPrice(cents) }}</span>
+    <span class="price" :class="{ 'price--sale': compareAtCents }">{{ formatPrice(cents) }}</span>
+    <s v-if="compareAtCents" class="ptag__was"><span class="visually-hidden">Предишна цена: </span>{{ formatPrice(compareAtCents) }}</s>
   </p>
 </template>
 
 <style scoped lang="scss">
+.price--sale {
+  color: var(--coral-600, #e0564d);
+}
+.ptag__was {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
 .ptag {
   display: inline-flex;
   align-items: baseline;

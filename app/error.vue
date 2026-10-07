@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import { products } from '~/data/products'
 import { sortProducts } from '~/utils/catalog'
 
 const props = defineProps<{ error: NuxtError }>()
 const is404 = computed(() => props.error?.statusCode === 404)
-const picks = computed(() => sortProducts(products.filter((p) => p.featured), 'recommended').slice(0, 4))
+const { products } = useCatalog()
+const picks = computed(() => sortProducts(products.value.filter((p) => p.featured), 'recommended').slice(0, 4))
 
 useHead({
   title: is404.value ? 'Страницата не е намерена' : 'Възникна грешка',

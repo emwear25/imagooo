@@ -1,5 +1,3 @@
-import { products } from '~/data/products'
-import { categories } from '~/data/categories'
 import { filaments, filamentOrder } from '~/data/filaments'
 import type { CategorySlug, FilamentId, Product } from '~/types/catalog'
 import {
@@ -33,9 +31,10 @@ const list = (v: unknown): string[] =>
 export function useCatalogFilters(fixedCategory?: CategorySlug) {
   const route = useRoute()
   const router = useRouter()
+  const { products, categories } = useCatalog()
 
   const q = computed(() => (typeof route.query.q === 'string' ? route.query.q : ''))
-  const cats = computed(() => list(route.query.kategoriya).filter((c) => categories.some((x) => x.slug === c)) as CategorySlug[])
+  const cats = computed(() => list(route.query.kategoriya).filter((c) => categories.value.some((x) => x.slug === c)) as CategorySlug[])
   const prices = computed(() => list(route.query.cena).filter((c) => PRICE_BANDS.some((b) => b.id === c)))
   const colors = computed(() => list(route.query.cvyat).filter((c) => c in filaments) as FilamentId[])
   const personal = computed(() => route.query.ime === '1')
@@ -76,22 +75,25 @@ export function useCatalogFilters(fixedCategory?: CategorySlug) {
   }
 
   const results = computed(() => {
-    const filtered = apply(products)
+    const filtered = apply(products.value)
     // keep search relevance order unless the user picked a sort
     return q.value.trim() && sort.value === 'recommended' ? filtered : sortProducts(filtered, sort.value)
   })
 
   const facets = computed(() => {
-    const byCat = apply(products, 'category')
-    const byPrice = apply(products, 'price')
-    const byColor = apply(products, 'color')
-    const byPersonal = apply(products, 'personal')
+    const byCat = apply(products.value, 'category')
+    const byPrice = apply(products.value, 'price')
+    const byColor = apply(products.value, 'color')
+    const byPersonal = apply(products.value, 'personal')
     return {
-      categories: categories
+      categories: categories.value
         .filter((c) => !fixedCategory || c.slug === fixedCategory)
         .map((c) => ({ ...c, count: byCat.filter((p) => inCategory(p, c.slug)).length })),
       prices: PRICE_BANDS.map((b) => ({ ...b, count: byPrice.filter((p) => p.priceCents >= b.min && p.priceCents <= b.max).length })),
-      colors: filamentOrder.map((id) => ({ ...filaments[id], count: byColor.filter((p) => productFilaments(p).has(id)).length })),
+      // Only palette colours that exist in the catalogue
+      colors: filamentOrder
+        .map((id) => ({ ...filaments[id], count: byColor.filter((p) => productFilaments(p).has(id)).length }))
+        .filter((c) => c.count > 0 || colors.value.includes(c.id)),
       personal: byPersonal.filter((p) => !!p.personalization).length,
     }
   })
@@ -100,7 +102,7 @@ export function useCatalogFilters(fixedCategory?: CategorySlug) {
     const out: ActiveChip[] = []
     if (q.value.trim()) out.push({ key: 'q', label: `„${q.value.trim()}“`, remove: () => update({ q: null }) })
     for (const c of cats.value)
-      out.push({ key: `c-${c}`, label: categories.find((x) => x.slug === c)!.name, remove: () => update({ kategoriya: cats.value.filter((x) => x !== c) }) })
+      out.push({ key: `c-${c}`, label: categories.value.find((x) => x.slug === c)?.name ?? c, remove: () => update({ kategoriya: cats.value.filter((x) => x !== c) }) })
     for (const p of prices.value)
       out.push({ key: `p-${p}`, label: PRICE_BANDS.find((b) => b.id === p)!.label, remove: () => update({ cena: prices.value.filter((x) => x !== p) }) })
     for (const c of colors.value)

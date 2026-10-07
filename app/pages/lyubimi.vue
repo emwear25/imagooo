@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useWishlistStore } from '~/stores/wishlist'
-import { products } from '~/data/products'
 import { sortProducts } from '~/utils/catalog'
 import { pluralProducts } from '~/utils/format'
+const { products } = useCatalog()
 
 const wishlist = useWishlistStore()
 const suggestions = computed(() =>
-  sortProducts(products.filter((p) => p.featured && !wishlist.has(p.slug)), 'recommended').slice(0, 4),
+  sortProducts(products.value.filter((p) => p.featured && !wishlist.has(p.slug)), 'recommended').slice(0, 4),
 )
 
 useSeo({
