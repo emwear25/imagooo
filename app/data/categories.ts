@@ -1,7 +1,8 @@
 import type { Category } from '~/types/catalog'
 
 /**
- * Presentation for the Imagoo categories (intro text, tile tint, showcase products).
+ * Presentation for the Imagoo categories (intro text, tile tint). Showcase products
+ * are picked from the live catalogue.
  * Categories themselves come from the backend; a category created in the dashboard
  * without a preset here gets neutral defaults (stores/catalog.ts).
  */
@@ -13,7 +14,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Скулптурни вази, меки кашпи и купички, които събират дребните неща с характер. Създадени слой по слой, за да внесат цвят и форма в дома без излишен шум.',
     tint: '#fde9e4',
-    showcase: ['vaza-valna', 'kashpa-oblak', 'vaza-prizma'],
+    showcase: [],
     seoDescription: 'Вази, кашпи и декоративни купи, изработени с 3D печат — Imagoo.',
   },
   {
@@ -23,7 +24,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Малки решения за чекмеджета, шкафове и плот. Модулни органайзери, щипки за пликове и стойки, които помагат всяко нещо да има своето място.',
     tint: '#e7f3ee',
-    showcase: ['organizer-modul', 'shtipki-zahapka', 'stoyka-etazh'],
+    showcase: [],
     seoDescription: 'Органайзери, щипки за пликове и стойки за кухнята, изработени с 3D печат — Imagoo.',
   },
   {
@@ -33,7 +34,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Дракони, октоподи и рибки със ставни части, които се извиват и движат. Направени за любопитни ръце, за бюрото и за колекцията на рафта.',
     tint: '#efe9fa',
-    showcase: ['oktopod-osmi', 'drakon-iskra', 'ribka-luna'],
+    showcase: [],
     seoDescription: 'Подвижни фигурки и фиджети, изработени с 3D печат — Imagoo.',
   },
   {
@@ -43,7 +44,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Малки неща, които носиш навсякъде. Ключодържатели с име, жетон за количка и форми, вдъхновени от безкрайността в нашето лого.',
     tint: '#fbf1d9',
-    showcase: ['klyuchodarzhatel-ime', 'klyuchodarzhatel-bezkraynost', 'zheton-kolichka'],
+    showcase: [],
     seoDescription: 'Ключодържатели с име и аксесоари, изработени с 3D печат — Imagoo.',
   },
   {
@@ -53,7 +54,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Поставка за телефон, държач за слушалки, клипсове за кабели и органайзер за бюро. Предмети, които решават малък проблем и изглеждат добре, докато го правят.',
     tint: '#e8eefa',
-    showcase: ['darzhach-daga', 'stoyka-naklon', 'organizer-terasa'],
+    showcase: [],
     seoDescription: 'Поставки, държачи и органайзери за бюро и дом, изработени с 3D печат — Imagoo.',
   },
   {
@@ -63,7 +64,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Подарък, който носи нечие име. Избери цвят, впиши надписа и ние ще го изработим специално за теб — табелки, моливници и ключодържатели.',
     tint: '#fdeee8',
-    showcase: ['tabelka-ime', 'molivnik-ime', 'klyuchodarzhatel-ime'],
+    showcase: [],
     seoDescription: 'Персонализирани подаръци с име, изработени с 3D печат — Imagoo.',
   },
   {
@@ -73,7 +74,7 @@ export const categoryPresets: Category[] = [
     intro:
       'По-големи комплекти, с които играта продължава с часове: кутия паста с купичка и вилица, бургер на етажи, магически отвари, чаен сервиз, шах и писта за топчета.',
     tint: '#fbeedd',
-    showcase: ['komplekt-pasta', 'komplekt-burger', 'chaen-komplekt'],
+    showcase: [],
     seoDescription: 'Комплекти за игра — паста, бургер, чаен сервиз, шах и писта за топчета, изработени с 3D печат — Imagoo.',
   },
   {
@@ -83,7 +84,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Скулптурни форми в сатенени и плътни цветове: безкрайна лента, нисък полигонен слон, арки за книги и релефно пано. Създадени да бъдат гледани.',
     tint: '#eeeae2',
-    showcase: ['skulptura-bezkraynost', 'slon-poligon', 'ogranichiteli-arka'],
+    showcase: [],
     seoDescription: 'Скулптури, ограничители за книги и стенни пана, изработени с 3D печат — Imagoo.',
   },
   {
@@ -93,7 +94,7 @@ export const categoryPresets: Category[] = [
     intro:
       'Тиква с фини ребра за есенната маса, коледна играчка с име и светилник за LED свещ. Малки ритуали, които правят сезона специален.',
     tint: '#f6e7dc',
-    showcase: ['tikva-rebro', 'koledna-igrachka-ime', 'svetilnik-korona'],
+    showcase: [],
     seoDescription: 'Сезонни и празнични декорации и подаръци с име, изработени с 3D печат — Imagoo.',
   },
 ]

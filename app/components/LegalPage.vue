@@ -12,9 +12,8 @@ defineProps<{ title: string; lead?: string; draft?: boolean; crumb?: string }>()
     <div v-if="draft" class="notice notice--danger legal__draft" role="note">
       <AppIcon name="alert" />
       <p>
-        <strong>Чернова — не е окончателен правен текст.</strong> Съдържанието е подготвено за демонстрационната версия и
-        подлежи на преглед от юрист, преди магазинът да започне да приема поръчки. Полетата, отбелязани с „предстои“, все
-        още не са потвърдени.
+        <strong>Чернова — предстои преглед от юрист.</strong> Полетата, отбелязани с „предстои“, все още не са
+        потвърдени.
       </p>
     </div>
     <div class="legal__body prose">

@@ -93,7 +93,7 @@ export interface DesignSource {
 export type ProductBadge = 'new' | 'personalizable' | 'set' | 'picked'
 
 export interface Product {
-  /** Backend product id (used for orders); demo products use demo ids. */
+  /** Backend product id (used for orders). */
   id: string
   slug: string
   name: string
@@ -125,8 +125,6 @@ export interface Product {
   design?: DesignSource
   /** Images per variant id. */
   images: Record<string, ProductImage[]>
-  /** White-ground render for tinted tiles (demo renders only). */
-  cutout?: ProductImage
 }
 
 export interface CartLine {
@@ -139,11 +137,3 @@ export interface CartLine {
   addedAt: number
 }
 
-/** Demo catalogue entry (app/data): colours by filament id, images from the render manifest. */
-export interface DemoVariant {
-  id: string
-  name: string
-  filaments: FilamentId[]
-}
-
-export type DemoProduct = Omit<Product, 'variants' | 'images' | 'cutout'> & { variants: DemoVariant[] }

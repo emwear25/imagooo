@@ -7,13 +7,13 @@ useSeo({
   path: '/za-nas',
 })
 
-const { products, productBySlug } = useCatalog()
-// Preferred products for the collage; any featured products when they're not in the catalogue
-const pics = computed(() => {
-  const preferred = ['kashpa-oblak', 'drakon-iskra', 'organizer-terasa'].map((s) => productBySlug(s)).filter((p) => !!p)
-  const list = preferred.length === 3 ? preferred : products.value.filter((p) => p.featured).slice(0, 3)
-  return list.map((p) => ({ p, img: cutoutImage(p) }))
-})
+const { products } = useCatalog()
+// Collage: featured products first, then the rest
+const pics = computed(() =>
+  [...products.value.filter((p) => p.featured), ...products.value.filter((p) => !p.featured)]
+    .slice(0, 3)
+    .map((p) => ({ p, img: cutoutImage(p) })),
+)
 </script>
 
 <template>
@@ -77,12 +77,6 @@ const pics = computed(() => {
           лицензи, които позволяват продажба на отпечатъци (Creative Commons CC0, CC BY и CC BY-SA). На страницата на
           всеки такъв продукт посочваме автора, оригиналния модел и лиценза. Авторските права върху дизайна остават за
           автора — ние изработваме и продаваме физическите отпечатъци.
-        </p>
-        <h2>За тази версия на сайта</h2>
-        <p>
-          В момента разглеждаш демонстрационна версия на магазина. Продуктите, цените и наличностите са примерни, а
-          снимките са концептуални визуализации, създадени специално за прототипа. Поръчки и плащания все още не се
-          приемат.
         </p>
         <p>
           <NuxtLink to="/produkti">Разгледай каталога</NuxtLink> или <NuxtLink to="/kontakti">пиши ни</NuxtLink>, ако имаш

@@ -1,12 +1,9 @@
 /**
- * Turn backend data (shared emWear/Imagoo API, store "imagoo") or the bundled
- * demo catalogue into the storefront's catalogue types.
+ * Turn backend data (shared emWear/Imagoo API, store "imagoo") into the
+ * storefront's catalogue types. All products come from the backend.
  */
-import manifest from '~/data/generated/product-images.json'
-import cutouts from '~/data/generated/product-cutouts.json'
 import { categoryPresets } from '~/data/categories'
 import { filaments } from '~/data/filaments'
-import { demoProducts } from '~/data/products'
 import type { Category, ColorVariant, FilamentId, Product, ProductBadge, ProductImage, Swatch } from '~/types/catalog'
 
 export interface Catalog {
@@ -29,23 +26,6 @@ function parseSwatch(raw: string): Swatch {
 
 function swatchFilaments(swatches: Swatch[]): FilamentId[] {
   return swatches.map((s) => filamentByHex.get(s.hex.toLowerCase())).filter((f): f is FilamentId => !!f)
-}
-
-// ---------------------------------------------------------------- demo
-
-export function buildDemoCatalog(): Catalog {
-  const images = manifest as Record<string, Record<string, ProductImage[]>>
-  const cut = cutouts as Record<string, { src: string; width: number; height: number }>
-  const products: Product[] = demoProducts.map((p) => ({
-    ...p,
-    variants: p.variants.map((v) => {
-      const swatches = v.filaments.map((f) => ({ hex: filaments[f].hex, silk: filaments[f].finish === 'silk' }))
-      return { id: v.id, name: v.name, swatches, filaments: v.filaments, available: true }
-    }),
-    images: images[p.slug] ?? {},
-    cutout: cut[p.slug] ? { view: 'hero', ...cut[p.slug]! } : undefined,
-  }))
-  return { products, categories: categoryPresets }
 }
 
 // ---------------------------------------------------------------- API
@@ -117,7 +97,6 @@ export function toProductImage(img: ApiImage, index: number): ProductImage {
 const cents = (eur: number | null | undefined) => Math.round((eur ?? 0) * 100)
 
 export function mapApiCatalog(apiCategories: ApiCategory[], apiProducts: ApiProduct[]): Catalog {
-  const cut = cutouts as Record<string, { src: string; width: number; height: number }>
   const presetBySlug = new Map(categoryPresets.map((c) => [c.slug, c]))
   const slugById = new Map(apiCategories.map((c) => [c._id, c.slug]))
 
@@ -153,7 +132,6 @@ export function mapApiCatalog(apiCategories: ApiCategory[], apiProducts: ApiProd
       }
 
       const original = p.originalPrice && p.originalPrice > p.price ? p.originalPrice : undefined
-      const cutoutRef = cut[p.slug!]
 
       return {
         id: p._id,
@@ -178,8 +156,6 @@ export function mapApiCatalog(apiCategories: ApiCategory[], apiProducts: ApiProd
         rank: sf.rank ?? 100 + index,
         design: sf.design ?? undefined,
         images,
-        // Demo renders have a white-ground cutout; real photos use the main image
-        cutout: cutoutRef && shared[0] && !shared[0].remote ? { view: 'hero', ...cutoutRef } : undefined,
       }
     })
 
@@ -197,9 +173,7 @@ export function mapApiCatalog(apiCategories: ApiCategory[], apiProducts: ApiProd
         short: preset?.short ?? `Продукти от категория „${name}“.`,
         intro: preset?.intro ?? `Разгледай продуктите от категория „${name}“, изработени с 3D печат.`,
         tint: preset?.tint ?? NEUTRAL_TINTS[i % NEUTRAL_TINTS.length]!,
-        showcase: preset?.showcase?.filter((s) => products.some((p) => p.slug === s)).length
-          ? preset.showcase
-          : inCat.slice(0, 3).map((p) => p.slug),
+        showcase: inCat.slice(0, 3).map((p) => p.slug),
         seoDescription: preset?.seoDescription ?? `${name} — 3D принтирани продукти от Imagoo.`,
       }
     })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { store } from '~/config/store'
-const { categories, canOrder } = useCatalog()
+const { categories } = useCatalog()
 
 const year = new Date().getFullYear()
 const c = store.company
@@ -63,7 +63,7 @@ const c = store.company
 
         <div class="ftr__bottom">
           <p>
-            © {{ year }} {{ c.legalName.value }} · {{ store.brand.name }}<template v-if="!canOrder">. Демонстрационна версия — цените и наличностите са примерни.</template>
+            © {{ year }} {{ c.legalName.value }} · {{ store.brand.name }}
           </p>
           <ul>
             <li><NuxtLink to="/obshti-usloviya">Общи условия</NuxtLink></li>
