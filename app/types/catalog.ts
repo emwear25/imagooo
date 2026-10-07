@@ -59,6 +59,15 @@ export interface ColorVariant {
   available?: boolean
 }
 
+/** A size the customer chooses (e.g. small / medium / large vase), with its own price. */
+export interface SizeOption {
+  /** Backend size name (orders need size + colour). */
+  id: string
+  name: string
+  /** Price in euro cents for this size. */
+  priceCents: number
+}
+
 export interface PersonalizationField {
   label: string
   placeholder: string
@@ -109,6 +118,11 @@ export interface Product {
   /** Price before discount, when the product is on sale. */
   compareAtCents?: number
   variants: ColorVariant[]
+  /**
+   * Sizes to choose from, when the product comes in several (each with its own
+   * price). `priceCents` is then the lowest of them ("from" price in listings).
+   */
+  sizes?: SizeOption[]
   personalization?: PersonalizationField
   specs: ProductSpecs
   /** Customer-facing caveat (e.g. not tested for food contact). */
@@ -128,10 +142,12 @@ export interface Product {
 }
 
 export interface CartLine {
-  /** Stable key: product + variant + personalization. */
+  /** Stable key: product + variant + size + personalization. */
   key: string
   slug: string
   variantId: string
+  /** Chosen size id, for products with several sizes. */
+  size?: string
   quantity: number
   personalization?: string
   addedAt: number

@@ -125,7 +125,7 @@ function onFocusOut(e: FocusEvent) {
             loading="lazy"
           />
           <span class="hs__name">{{ p.name }}</span>
-          <span class="hs__price price">{{ formatPrice(p.priceCents) }}</span>
+          <span class="hs__price price">{{ p.sizes ? 'от ' : '' }}{{ formatPrice(p.priceCents) }}</span>
         </li>
         <li
           :id="`${listId}-${results.length}`"

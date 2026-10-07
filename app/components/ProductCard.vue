@@ -23,6 +23,7 @@ const to = computed(() => ({
   query: variantId.value !== props.product.variants[0]!.id ? { cvyat: variantId.value } : undefined,
 }))
 const needsInput = computed(() => !!props.product.personalization?.required)
+const choosesSize = computed(() => !!props.product.sizes)
 const saved = computed(() => wishlist.has(props.product.slug))
 
 const badgeText: Record<string, string> = {
@@ -96,10 +97,13 @@ function toggleWish() {
       </div>
 
       <div class="card__foot">
-        <PriceTag :cents="product.priceCents" :compare-at-cents="product.compareAtCents" />
+        <PriceTag :cents="product.priceCents" :compare-at-cents="product.compareAtCents" :from="choosesSize" />
         <NuxtLink v-if="needsInput" :to="to" class="btn btn--ghost btn--sm card__action">
           <AppIcon name="pen" />
           Персонализирай
+        </NuxtLink>
+        <NuxtLink v-else-if="choosesSize" :to="to" class="btn btn--ghost btn--sm card__action">
+          Избери размер
         </NuxtLink>
         <span v-else-if="variant.available === false" class="card__soldout">Изчерпан</span>
         <button v-else type="button" class="btn btn--sm card__action" @click="quickAdd">
