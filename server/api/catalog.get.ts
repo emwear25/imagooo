@@ -1,9 +1,10 @@
 /**
  * Catalogue proxy with a short server-side cache.
  *
- * Every page render needs the whole Imagoo catalogue; caching it here (60 s,
- * stale-while-revalidate) keeps page loads fast and spares the shared backend.
- * New products from the dashboard appear within about a minute.
+ * Every page render needs the whole Imagoo catalogue; caching it here (60 s)
+ * keeps page loads fast and spares the shared backend. No stale-while-revalidate:
+ * on Vercel the background refresh is cut off when the function freezes, which
+ * left the old catalogue cached indefinitely. New products appear within a minute.
  */
 export default defineCachedEventHandler(
   async () => {
@@ -15,5 +16,5 @@ export default defineCachedEventHandler(
     ])
     return { categories: categories.data ?? [], products: products.data ?? [] }
   },
-  { name: 'imagoo-catalog', maxAge: 60, swr: true },
+  { name: 'imagoo-catalog', maxAge: 60, swr: false },
 )
