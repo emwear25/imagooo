@@ -151,7 +151,9 @@ function toggleWish() {
   }
 }
 
-.card__img--alt {
+// .card__media raises specificity above ProductImage's own `position: relative`,
+// otherwise the hover image stacks below the main one and doubles the card height
+.card__media .card__img--alt {
   position: absolute;
   inset: 0;
   opacity: 0;
