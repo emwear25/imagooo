@@ -14,6 +14,9 @@
  * lowest price becomes the product price and each size's price is stored on
  * its variants. Every variant is (re)stocked with "stockPerColor".
  *
+ * "printSource": { "url", "note" } stores the internal print-file link (e.g. the
+ * MakerWorld page) that the dashboard shows on the product and its orders.
+ *
  * "active": false in product.json keeps the product hidden from the shop
  * (e.g. until a design licence is confirmed); "active": true shows it again.
  *
@@ -160,6 +163,11 @@ if (sizePriced || existing) {
   }))
   await api(`/api/variant-stock/${saved._id}/variants/bulk`, { method: 'PUT', token, json: { variants } })
   if (sizePriced) console.log(`  sizes: ${sizes.map((s) => `${s.name} ${s.price ?? basePrice} €`).join(', ')}`)
+}
+
+if (product.printSource?.url) {
+  await api(`/api/products/${saved._id}`, { method: 'PATCH', token, json: { printSource: product.printSource } })
+  console.log(`  print file: ${product.printSource.url}`)
 }
 
 if (typeof product.active === 'boolean') {
